@@ -1,0 +1,150 @@
+
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 100vh;
+  padding: 1.5rem;
+  color: #f1f3ff;
+  background:
+    radial-gradient(ellipse at top, #211b3c, transparent 60%),
+    #080d17;
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: min(26.25rem, calc(100vw - 3rem));
+  padding: 2rem;
+  border: 1px solid #273249;
+  border-radius: 1.25rem;
+  background: #0e1524;
+  box-shadow: 0 1.5rem 4rem #0004;
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.5625rem;
+  font-weight: 800;
+}
+
+.login-logo-symbol {
+  color: #a98aff;
+  font-size: 2rem;
+}
+
+.login-logo-text {
+  color: #f1f3ff;
+}
+
+.login-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin-bottom: 1.75rem;
+}
+
+.login-title {
+  font-size: 1.75rem;
+  line-height: 1.3;
+}
+
+.login-description {
+  color: #a8b6d0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.login-label {
+  color: #f1f3ff;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.login-input {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 2.875rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid #34405a;
+  border-radius: 0.625rem;
+  color: #f1f3ff;
+  background: #080d17;
+  font-size: 0.875rem;
+  transition: border-color 0.2s ease;
+}
+
+.login-input::placeholder {
+  color: #73819b;
+}
+
+.login-input:focus {
+  border-color: #a98aff;
+}
+
+.login-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.875rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 0.625rem;
+  color: #100c21;
+  background: linear-gradient(135deg, #c0a8ff, #9879f4);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+
+.login-submit:hover {
+  transform: translateY(-0.125rem);
+}
+
+.login-back-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  margin-top: 1.5rem;
+  color: #a98aff;
+  font-size: 0.875rem;
+}
+
+.login-back-link:hover {
+  color: #c0a8ff;
+}
+
+@media (max-width: 30rem) {
+  .login-page {
+    padding: 1rem;
+  }
+
+  .login-card {
+    width: calc(100vw - 2rem);
+    padding: 1.5rem;
+  }
+
+  .login-title {
+    font-size: 1.5rem;
+  }
+}
