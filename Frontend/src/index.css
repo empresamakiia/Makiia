@@ -10,3 +10,19 @@
 body {
   font-family: "Inter", sans-serif;
 }
+
+.app-smooth-scroll {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+
+.app-hide-cursor,
+.app-hide-cursor * {
+  cursor: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-smooth-scroll {
+    scroll-behavior: auto;
+  }
+}
