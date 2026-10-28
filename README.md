@@ -1,85 +1,198 @@
-# Makiia Backend
+# Makiia
 
-API do sistema Makiia — back-end desenvolvido em Python com FastAPI.
+Plataforma em desenvolvimento para apoiar a criação e organização de conteúdos de marketing com inteligência artificial. Este repositório reúne uma interface web em React e uma API REST em Python com FastAPI.
 
-## Sobre o projeto
+> **Estado atual:** o frontend contém uma landing page e uma tela visual de login. O backend fornece a estrutura inicial da API e um endpoint de verificação de saúde. Autenticação, geração de conteúdo por IA, persistência de dados e integração entre frontend e backend ainda não estão implementadas.
 
-Back-end responsável por fornecer a API do sistema Makiia, seguindo uma
-arquitetura modular e preparada para integração futura com banco de dados
-e front-end.
+## Funcionalidades disponíveis
 
-## Stack
+- Landing page com apresentação da proposta e navegação para a tela de login.
+- Rotas de frontend `/` e `/login`, gerenciadas pelo React Router.
+- Formulário de login com validações nativas do navegador; o envio ainda não autentica o usuário.
+- API FastAPI com endpoint `GET /health`.
+- Documentação interativa da API via Swagger UI e ReDoc.
+- Configuração de CORS para desenvolvimento local nas portas `3000` e `5173`.
+- Teste automatizado do endpoint de saúde.
 
-- Python 3.13
-- FastAPI
-- Uvicorn (servidor ASGI)
-- Pydantic Settings (configuração via variáveis de ambiente)
-- Pytest (testes)
+## Tecnologias
+
+| Camada | Tecnologias |
+| --- | --- |
+| Frontend | React 19, JavaScript, Vite 8, React Router 7, Axios |
+| Backend | Python, FastAPI, Uvicorn, Pydantic Settings |
+| Testes do backend | Pytest, FastAPI TestClient, HTTPX |
 
 ## Estrutura do projeto
 
-- app/               # código-fonte da aplicação
-    - database/      # conexão e sessões do banco de dados
-    - models/        # modelos (ORM)
-    - routers/       # rotas da API
-    - schemas/       # esquemas de validação (Pydantic)
-    - services/      # regras de negócio
-    - config.py      # configurações da aplicação (Settings)
-    - main.py        # montagem da aplicação (CORS, rotas, Swagger)
-- tests/             # testes automatizados
-- .env               # variáveis de ambiente (NÃO versionado)
-- .env.example       # modelo das variáveis de ambiente
-- requirements.txt   # dependências
+```text
+Makiia/
+├── Backend/
+│   ├── app/
+│   │   ├── database/       # Preparação para acesso a dados
+│   │   ├── models/         # Modelos da aplicação
+│   │   ├── routers/        # Rotas da API, incluindo /health
+│   │   ├── schemas/        # Esquemas de validação
+│   │   ├── services/       # Camada de serviços
+│   │   ├── config.py       # Configurações via ambiente
+│   │   └── main.py         # Aplicação FastAPI, CORS e documentação
+│   ├── tests/              # Testes automatizados
+│   ├── .env.example        # Exemplo de configuração local
+│   └── requirements.txt    # Dependências Python
+├── Frontend/
+│   ├── src/
+│   │   ├── pages/          # Páginas Home e Login
+│   │   ├── App.jsx         # Rotas do frontend
+│   │   ├── index.css       # Estilos globais
+│   │   └── main.jsx        # Inicialização do React
+│   ├── package.json
+│   └── vite.config.js
+└── README.md
+```
 
-## Padrões do projeto
+## Pré-requisitos
 
-- Nomenclatura: snake_case para módulos, funções e variáveis; PascalCase para classes
-- Organização: rotas em routers/, regras de negócio em services/, validação em schemas/, banco em models/ e database/
-- Git: commits semânticos (feat:, fix:, docs:, refactor:, test:, chore:), desenvolvimento exclusivo em branch feat/nome-descricao
-- Credenciais: nunca versionadas — apenas o .env.example com os nomes das variáveis
+- Git
+- Python 3.13 ou superior
+- Node.js compatível com Vite 8 e npm
 
-## Como rodar o projeto
+Não é necessário configurar PostgreSQL para executar a versão atual: o backend ainda não persiste dados.
 
-1. Criar e ativar o ambiente virtual:
+## Como executar localmente
 
-    python -m venv venv
-    venv\Scripts\Activate.ps1
+### 1. Clone o repositório
 
-2. Instalar as dependências:
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd Makiia
+```
 
-    pip install -r requirements.txt
+### 2. Configure e inicie o backend
 
-3. Configurar as variáveis de ambiente: copiar .env.example para .env e preencher os valores.
+No terminal, entre na pasta do backend e crie um ambiente virtual:
 
-4. Executar a aplicação:
+```bash
+cd Backend
+python -m venv .venv
+```
 
-    uvicorn app.main:app --reload
+Ative o ambiente virtual. No PowerShell:
 
-5. Acessar:
+```powershell
+.venv\Scripts\Activate.ps1
+```
 
-- API: http://localhost:8000
-- Documentação (Swagger): http://localhost:8000/docs
+No Linux ou macOS:
 
-## Testes
+```bash
+source .venv/bin/activate
+```
 
-    pytest
+Instale as dependências e crie o arquivo local de configuração:
 
-## Endpoints
+```bash
+python -m pip install -r requirements.txt
+```
 
-| Método | Rota       | Descrição                                                                 |
-|--------|------------|---------------------------------------------------------------------------|
-| GET    | /health    | Verificação de saúde da aplicação (status, nome e versão)                 |
+No PowerShell:
 
-## Sprint 1
+```powershell
+Copy-Item .env.example .env
+```
 
-- [x] Tarefa 1 — Configuração do ambiente de desenvolvimento
-- [x] Tarefa 2 — Estrutura modular do back-end
-- [ ] Tarefa 3 — Modelagem do banco de dados
-- [ ] Tarefa 4 — Integração com banco de dados
-- [ ] Tarefa 5 — Migrações
-- [x] Tarefa 6 — CORS e documentação (Swagger)
+No Linux ou macOS:
+
+```bash
+cp .env.example .env
+```
+
+As configurações disponíveis têm valores padrão no exemplo:
+
+```dotenv
+APP_NAME="Makiia Backend"
+APP_VERSION="0.1.0"
+DEBUG=True
+```
+
+Inicie a API a partir da pasta `Backend`:
+
+```bash
+python -m uvicorn app.main:app --reload
+```
+
+A API ficará disponível em `http://localhost:8000`.
+
+### 3. Inicie o frontend
+
+Em outro terminal, na raiz do repositório:
+
+```bash
+cd Frontend
+npm install
+npm run dev
+```
+
+Abra o endereço exibido pelo Vite, normalmente `http://localhost:5173`.
+
+## Rotas e documentação da API
+
+| Método | Rota | Autenticação | Descrição |
+| --- | --- | --- | --- |
+| `GET` | `/health` | Não | Retorna o estado, nome e versão da API. |
+
+Exemplo de resposta de `GET /health`:
+
+```json
+{
+  "status": "ok",
+  "app": "Makiia Backend",
+  "version": "0.1.0"
+}
+```
+
+Com o backend em execução, a documentação fica disponível em:
+
+- Swagger UI: `http://localhost:8000/docs`
+- ReDoc: `http://localhost:8000/redoc`
+- Especificação OpenAPI: `http://localhost:8000/openapi.json`
+
+## Rotas do frontend
+
+| Rota | Página | Observação |
+| --- | --- | --- |
+| `/` | Home | Landing page da Makiia. |
+| `/login` | Login | Formulário visual; ainda não envia credenciais para a API. |
+
+O frontend e a API ainda não estão integrados. A tela de login não cria sessão, não utiliza JWT e não deve ser considerada um mecanismo de autenticação implementado.
+
+## Testes e validações
+
+Para executar os testes do backend, ative o ambiente virtual, entre em `Backend` e rode:
+
+```bash
+pytest
+```
+
+Para compilar o frontend:
+
+```bash
+cd Frontend
+npm run build
+```
+
+Para verificar o estilo do código do frontend:
+
+```bash
+npm run lint
+```
+
+## Configuração e segurança
+
+- O backend carrega configurações do arquivo `Backend/.env` e de variáveis de ambiente. O arquivo `.env` é ignorado pelo Git.
+- Não armazene senhas, tokens ou outras credenciais no repositório.
+- O CORS atual permite `http://localhost:3000` e `http://localhost:5173`; ajuste essa lista antes de publicar em outro domínio.
+- Os valores em `.env.example` são exemplos de configuração, não credenciais de produção.
 
 ## Equipe
 
-Desenvolvimento do back-end: João Pedro
-Responsável pela sprint e integração de PRs: Ana Beatriz
+- Desenvolvimento do backend: João Pedro.
+- Responsável pela sprint e integração de pull requests: Ana Beatriz.
