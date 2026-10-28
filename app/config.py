@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     APP_NAME: str = "Makiia Backend"
     APP_VERSION: str = "0.1.0"
     DEBUG: bool = False
+    database_url: str
 
     model_config = SettingsConfigDict(env_file=".env")
 

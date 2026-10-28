@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 .env
 .pytest_cache/
+# Scripts de teste/diagnóstico locais
+teste_*.py
+verifica_tabelas.py

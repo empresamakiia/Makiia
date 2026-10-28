@@ -2,13 +2,27 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
-from app.routers import health
+from app.routers import auth, health
+from app.routers import perfis
+from app.routers import usuarios
 
 # Metadados das tags: organizam os grupos de endpoints na documentação
 tags_metadata = [
     {
         "name": "Health",
         "description": "Endpoints de verificação de saúde da aplicação.",
+    },
+    {
+        "name": "Perfis",
+        "description": "Gestão de perfis de acesso do sistema.",
+    },
+    {
+        "name": "Usuários",
+        "description": "Gestão de usuários do sistema.",
+    },
+    {
+        "name": "Autenticação",
+        "description": "Login e verificação de credenciais de usuários.",
     },
 ]
 
@@ -42,3 +56,6 @@ app.add_middleware(
 )
 
 app.include_router(health.router)
+app.include_router(perfis.router)
+app.include_router(usuarios.router)
+app.include_router(auth.router)
