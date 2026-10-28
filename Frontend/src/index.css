@@ -1,0 +1,28 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.app-smooth-scroll {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+
+.app-hide-cursor,
+.app-hide-cursor * {
+  cursor: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-smooth-scroll {
+    scroll-behavior: auto;
+  }
+}
