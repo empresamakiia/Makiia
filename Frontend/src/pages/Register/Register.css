@@ -1,0 +1,75 @@
+/* Reaproveita todo o visual do login (layout, inputs, botões, painel criativo). */
+@import url("../Login/Login.css");
+
+/* ---------- Cadastro: painel criativo à esquerda, formulário à direita ---------- */
+.register-page {
+  flex-direction: row-reverse;
+}
+
+/* Os campos entram vindo da esquerda (no login vêm da direita) */
+.login-page.register-page .stagger {
+  --from: -1.8rem;
+}
+
+/* Entrada da página: painel e formulário deslizam para o lugar */
+.register-page:not(.is-arriving) .creative-panel {
+  animation: register-panel-in 0.4s var(--ease-out) backwards;
+}
+.register-page:not(.is-arriving) .login-section {
+  animation: register-section-in 0.4s var(--ease-out) backwards;
+}
+@keyframes register-panel-in {
+  from { opacity: 0; transform: translateX(calc(var(--section-w) * -0.35)); }
+}
+@keyframes register-section-in {
+  from { opacity: 0; transform: translateX(calc(var(--section-w) * 0.2)); }
+}
+
+/* O cadastro tem mais campos, então ajusta um pouco o espaçamento */
+.register-page .login-content { margin: 1.2rem auto; }
+.register-page .login-form { gap: 0.85rem; }
+.register-page .login-heading { margin-bottom: 1rem; }
+
+/* ---------- Medidor de força da senha ---------- */
+.strength { display: flex; align-items: center; gap: 0.6rem; }
+.strength-bars { display: flex; flex: 1; gap: 0.25rem; }
+.strength-bars span {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: #2c2634;
+  transition: background 0.3s ease;
+}
+.strength small { color: #8f8797; font-size: 0.6rem; white-space: nowrap; }
+
+.strength[data-level="1"] .strength-bars span.on { background: #ff5f6d; }
+.strength[data-level="2"] .strength-bars span.on { background: #ff8149; }
+.strength[data-level="3"] .strength-bars span.on { background: #ffbd4a; }
+.strength[data-level="4"] .strength-bars span.on { background: #4ade80; }
+
+/* ---------- Termos e erro ---------- */
+.terms-option { align-items: flex-start; line-height: 1.5; }
+.terms-option input { margin-top: 0.15rem; flex-shrink: 0; }
+.terms-option a { color: #ff854f; text-decoration: none; }
+.terms-option a:hover { color: #ffb38b; text-decoration: underline; }
+
+.form-error {
+  margin: 0;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid rgb(255 95 109 / 35%);
+  border-radius: 0.7rem;
+  color: #ffb3ba;
+  background: rgb(255 95 109 / 8%);
+  font-size: 0.65rem;
+  line-height: 1.5;
+  animation: error-in 0.35s var(--ease-out);
+}
+@keyframes error-in { from { opacity: 0; transform: translateY(-0.4rem); } }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 760px) {
+  /* No celular, formulário primeiro e painel embaixo, igual ao login */
+  .register-page { flex-direction: column; }
+  .register-page .creative-panel,
+  .register-page .login-section { animation: none; }
+}
