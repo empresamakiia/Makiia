@@ -1,10 +1,12 @@
 
+import logo from "../../assets/makiia-logo.png";
+
 export default function Logo({ size = 28, showName = true }) {
   return (
     <span className="brand-logo">
       <img
         className="brand-logo__image"
-        src="/images/logo.png"
+        src={logo}
         alt=""
         width={size}
         height={size}

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import initLanding from "./Main.js";
-import Logo from "../../components/Logo.jsx";
+import Logo from "../../components/Logo/Logo.jsx";
 import "./Home.css";
 
 export default function Home() {
@@ -46,7 +46,7 @@ export default function Home() {
                 <a className="btn" href="/login">
                   Entrar
                 </a>
-                <a className="btn pri" href="#cta">
+                <a className="btn pri" href="/login#cadastro">
                   Começar grátis
                 </a>
               </div>
@@ -55,7 +55,7 @@ export default function Home() {
               <a className="btn sm" href="/login">
                 Entrar
               </a>
-              <a className="btn sm pri mag" href="#cta">
+              <a className="btn sm pri mag" href="/login#cadastro">
                 Começar grátis
               </a>
               <button
@@ -90,7 +90,7 @@ export default function Home() {
             o seu briefing e mantém cada peça coerente com a marca.
           </p>
           <div className="row rv" style={{ "--d": ".45s" }}>
-            <a className="btn pri mag" href="#cta">
+            <a className="btn pri mag" href="/login#cadastro">
               Começar a criar →
             </a>
             <a className="btn mag" href="#pratica">
@@ -489,7 +489,7 @@ export default function Home() {
                     className="row"
                     style={{ justifyContent: "flex-start", marginTop: "30px" }}
                   >
-                    <a className="btn pri mag" href="#cta">
+                    <a className="btn pri mag" href="/login#cadastro">
                       Experimentar
                     </a>
                   </div>
@@ -600,7 +600,7 @@ export default function Home() {
                   <li>Exporte em PNG</li>
                   <li>Modo criativo básico</li>
                 </ul>
-                <a className="btn" href="#cta">
+                <a className="btn" href="/login#cadastro">
                   Começar
                 </a>
               </div>
@@ -619,7 +619,7 @@ export default function Home() {
                   <li>Biblioteca de identidade visual</li>
                   <li>Raciocínio estendido</li>
                 </ul>
-                <a className="btn pri mag" href="#cta">
+                <a className="btn pri mag" href="/login#cadastro">
                   Assinar Pro
                 </a>
               </div>
@@ -632,7 +632,7 @@ export default function Home() {
                   <li>Comentários e aprovação</li>
                   <li>Suporte prioritário</li>
                 </ul>
-                <a className="btn" href="#cta">
+                <a className="btn" href="/login">
                   Falar com a gente
                 </a>
               </div>
