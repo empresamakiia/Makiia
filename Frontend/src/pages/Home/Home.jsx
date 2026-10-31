@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import initLanding from "./Main.js";
 import Logo from "../../components/Logo/Logo.jsx";
 import "./Home.css";
+import "./Home-poster.css";
+import brasaPosterBg from "../../assets/brasa-poster-bg.png";
 
 export default function Home() {
   useEffect(() => initLanding(), []);
@@ -83,7 +85,8 @@ export default function Home() {
             <b>NOVO</b>MAKIIA 2 com raciocínio criativo estendido
           </span>
           <h1 data-split>
-            Sua marca, criada na velocidade da <span className="gt">ideia</span>
+            Sua campanha, criada na velocidade da{" "}
+            <span className="gt">ideia</span>
           </h1>
           <p className="rv" style={{ "--d": ".35s" }}>
             Gere logos, cartazes e identidade visual conversando. A MAKIIA
@@ -91,7 +94,7 @@ export default function Home() {
           </p>
           <div className="row rv" style={{ "--d": ".45s" }}>
             <a className="btn pri mag" href="/login#cadastro">
-              Começar a criar →
+              Começar a criar
             </a>
             <a className="btn mag" href="#pratica">
               ▶ Ver em ação
@@ -110,11 +113,11 @@ export default function Home() {
                     <i></i>
                     <i></i>
                   </div>
-                  <span>MAKIIA · STUDIO / PROJETO BRASA</span>
+                  <span>MAKIIA · STUDIO / GRÃO & PROSA</span>
                 </div>
                 <div className="wb">
                   <div className="sd">
-                    <div className="on">Identidade Brasa</div>
+                    <div className="on">Grão & Prosa</div>
                     <div>Caramella</div>
                     <div>Studio Aurora</div>
                     <div>Posts Black Friday</div>
@@ -123,41 +126,56 @@ export default function Home() {
                     <div className="me">
                       <span
                         id="typed"
-                        data-text="Preciso de um logo e um cartaz para a cafeteria Brasa. Quero algo quente e moderno."
+                        data-text="Preciso de um logo e um cartaz para a cafeteria Grão & Prosa. Quero um cartaz acolhedor para divulgar os cafés especiais e os métodos da casa."
                       ></span>
                       <i className="caret"></i>
                     </div>
                     <div className="ai seq" data-step="1">
-                      <Logo size={28} showName={false} />
+                      <span className="coffee-assistant-mark" aria-hidden="true">
+                        <svg viewBox="0 0 32 32">
+                          <path d="M16 4c6.4 0 11 5 11 11.4S22.5 28 16 28 5 22.8 5 16.2 9.6 4 16 4Z" fill="url(#lg)" />
+                          <path d="M11 22c4-2.2 7-6 10-12" fill="none" stroke="#21120d" strokeWidth="2" strokeLinecap="round" />
+                        </svg>
+                      </span>
                       <div>
                         <span className="rs" id="rs">
                           Esculpindo…
                         </span>
                         <div className="t">
-                          Aqui estão três caminhos, todos com paleta quente
-                          derivada do nome.
+                          Três ideias de símbolo para a identidade: um grão, um selo e uma xícara.
                         </div>
-                        <div className="chips">
-                          <div className="s">
-                            <Logo size={40} showName={false} />
-                          </div>
-                          <div>
-                            <svg width="38" height="38" viewBox="0 0 34 34">
-                              <path
-                                d="M17 3l12 7v14l-12 7-12-7V10z"
-                                fill="url(#lg)"
-                              />
-                              <circle cx="17" cy="17" r="4.5" fill="#0D0918" />
-                            </svg>
-                          </div>
-                          <div>
-                            <svg width="38" height="38" viewBox="0 0 34 34">
-                              <path
-                                d="M17 3c7 9 10 13 10 18a10 10 0 01-20 0c0-5 3-9 10-18z"
-                                fill="url(#lg)"
-                              />
-                            </svg>
-                          </div>
+                        <div className="chips" aria-label="Três conceitos de símbolo para a cafeteria">
+                          <button className="chip-option is-selected" type="button" aria-label="Conceito Grão">
+                            <span className="chip-mark">
+                              <svg viewBox="0 0 40 40" aria-hidden="true">
+                                <path d="M20 5c8 0 14 6 14 14S27 35 19 35 6 29 6 21 12 5 20 5Z" fill="url(#lg)" />
+                                <path d="M13 28c5-3 9-8 14-16" fill="none" stroke="#171019" strokeWidth="2.5" strokeLinecap="round" />
+                              </svg>
+                            </span>
+                            <span className="chip-name">Grão</span>
+                          </button>
+
+                          <button className="chip-option" type="button" aria-label="Conceito Selo">
+                            <span className="chip-mark">
+                              <svg viewBox="0 0 40 40" aria-hidden="true">
+                                <path d="M20 4 24 9 31 8 32 15 37 20 32 25 31 32 24 31 20 36 16 31 9 32 8 25 3 20 8 15 9 8 16 9Z" fill="url(#lg)" />
+                                <circle cx="20" cy="20" r="6" fill="#171019" />
+                                <path d="M20 15v10M15 20h10" stroke="#f4d8b0" strokeWidth="1.5" />
+                              </svg>
+                            </span>
+                            <span className="chip-name">Selo</span>
+                          </button>
+
+                          <button className="chip-option" type="button" aria-label="Conceito Xícara">
+                            <span className="chip-mark">
+                              <svg viewBox="0 0 40 40" aria-hidden="true">
+                                <path d="M8 17h20v8a8 8 0 0 1-8 8h-4a8 8 0 0 1-8-8v-8Z" fill="url(#lg)" />
+                                <path d="M28 19h2a4 4 0 0 1 0 8h-3" fill="none" stroke="#f4d8b0" strokeWidth="2" />
+                                <path d="M14 13c-2-2 2-3 0-5m7 5c-2-2 2-3 0-5" fill="none" stroke="#f4d8b0" strokeWidth="1.8" strokeLinecap="round" />
+                              </svg>
+                            </span>
+                            <span className="chip-name">Xícara</span>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -168,32 +186,36 @@ export default function Home() {
                       </div>
                       <div
                         className="poster motion-poster"
-                        role="img"
-                        aria-label="Cartaz exemplo para a cafeteria Brasa, com fundo vinho, círculos abstratos laranja e tipografia editorial"
+                        aria-label="Cartaz promocional da cafeteria Grão & Prosa com fotografia realista de café"
                       >
-                        <div className="poster-noise" aria-hidden="true"></div>
+                        <img
+                          className="poster-photo"
+                          src={brasaPosterBg}
+                          alt=""
+                          aria-hidden="true"
+                        />
+                        <div className="poster-shade" aria-hidden="true"></div>
+
                         <div className="poster-top">
-                          <span>BRASA® — COFFEE HOUSE</span>
-                          <span>EST. 2026</span>
+                          <strong>Grão &amp; Prosa</strong>
+                          <span>CAFETERIA</span>
                         </div>
-                        <div className="poster-art" aria-hidden="true">
-                          <i className="orb orb-one"></i>
-                          <i className="orb orb-two"></i>
-                          <i className="orb orb-three"></i>
-                          <i className="orbit-line"></i>
-                        </div>
+
                         <div className="poster-copy">
                           <span className="poster-kicker">
-                            A NOVA FORMA DE SENTIR O CAFÉ.
+                            CAFÉS DE ORIGEM · TORRA ARTESANAL
                           </span>
                           <strong>
-                            Brasa<span className="poster-dot">.</span>
+                            O tempo pede
+                            <br />
+                            um bom café.
                           </strong>
-                          <p>O calor de um bom encontro.</p>
+                          <p>Escolhas de origem, extraídas com calma.</p>
                         </div>
+
                         <div className="poster-bottom">
-                          <span>ABERTURA EM BREVE</span>
-                          <span>CAFÉ • CULTURA • ENCONTROS</span>
+                          <span>ESPRESSO · COADOS</span>
+                          <span>DOCES DA CASA</span>
                         </div>
                       </div>
                       <div className="artwork-footer">
@@ -230,12 +252,6 @@ export default function Home() {
 
         <div className="w">
           <div className="met">
-            <div className="rv">
-              <b className="gt" data-count="10" data-suffix="x">
-                10x
-              </b>
-              <span>MAIS RÁPIDO</span>
-            </div>
             <div className="rv" style={{ "--d": ".08s" }}>
               <b className="gt" data-count="50" data-prefix="+">
                 +50
@@ -262,7 +278,8 @@ export default function Home() {
             <div className="head rv">
               <span className="cap ac">Recursos</span>
               <h2>
-                Tudo para dar <span className="gt">forma</span> à sua marca
+                Tudo para dar <span className="gt">forma</span> às suas
+                campanhas
               </h2>
               <p>Do primeiro conceito ao arquivo final, em uma só conversa.</p>
             </div>
@@ -458,7 +475,7 @@ export default function Home() {
                 <p>Cartazes e posts prontos, com a marca já aplicada.</p>
                 <div className="mini pst">
                   <Logo size={26} showName={false} />
-                  <b>Brasa</b>
+                  <b>Grão &amp; Prosa</b>
                 </div>
               </article>
             </div>
@@ -689,13 +706,13 @@ export default function Home() {
               </div>
               <div className="it">
                 <button className="q" aria-expanded="false">
-                  Preciso de cartão de crédito para começar?<i></i>
+                  Preciso informar uma forma de pagamento para começar?<i></i>
                 </button>
                 <div className="a">
                   <div>
                     <p>
-                      Não. O plano grátis não pede cartão e você pode mudar de
-                      plano quando quiser.
+                      Não. O plano grátis pode ser usado sem cadastrar uma forma
+                      de pagamento.
                     </p>
                   </div>
                 </div>
@@ -710,14 +727,14 @@ export default function Home() {
               <div className="cta">
                 <h2 style={{ marginTop: "14px" }}>
                   Pronto para criar sua próxima{" "}
-                  <span className="gt">marca</span>?
+                  <span className="gt">campanha</span>?
                 </h2>
                 <p>
                   Comece com um briefing e veja as primeiras ideias em minutos.
                 </p>
                 <div className="row">
                   <a className="btn pri mag" href="/login#cadastro">
-                    Criar meu projeto →
+                    Criar meu projeto
                   </a>
                   <a className="btn mag" href="/login">
                     Entrar
