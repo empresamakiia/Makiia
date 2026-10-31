@@ -86,8 +86,8 @@ export default function Home() {
             Sua marca, criada na velocidade da <span className="gt">ideia</span>
           </h1>
           <p className="rv" style={{ "--d": ".35s" }}>
-            Gere logos, cartazes e identidade visual conversando. A MAKIIA entende
-            o seu briefing e mantém cada peça coerente com a marca.
+            Gere logos, cartazes e identidade visual conversando. A MAKIIA
+            entende o seu briefing e mantém cada peça coerente com a marca.
           </p>
           <div className="row rv" style={{ "--d": ".45s" }}>
             <a className="btn pri mag" href="/login#cadastro">
@@ -475,8 +475,8 @@ export default function Home() {
                     Uma conversa que vira <span className="gt">design</span>
                   </h2>
                   <p className="mut" style={{ marginTop: "16px" }}>
-                    Refine em linguagem natural. A MAKIIA ajusta a peça e preserva
-                    a identidade.
+                    Refine em linguagem natural. A MAKIIA ajusta a peça e
+                    preserva a identidade.
                   </p>
                   <ul>
                     <li>
