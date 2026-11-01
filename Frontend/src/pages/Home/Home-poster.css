@@ -1,0 +1,233 @@
+/* Cartaz fotográfico minimalista Grão & Prosa */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap");
+
+.poster.motion-poster {
+  position: relative !important;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: min(100%, 300px) !important;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: 4 / 5 !important;
+  margin: 0;
+  padding: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(239, 218, 188, 0.24);
+  border-radius: 12px;
+  background: #160d08 !important;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+  text-align: left;
+}
+
+.poster.motion-poster > .poster-photo {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  object-position: center 46% !important;
+}
+
+.poster.motion-poster > .poster-shade {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 10, 7, 0.78) 0%,
+    rgba(18, 10, 7, 0.52) 24%,
+    rgba(18, 10, 7, 0.12) 48%,
+    rgba(18, 10, 7, 0.12) 72%,
+    rgba(18, 10, 7, 0.78) 100%
+  ) !important;
+}
+
+.poster.motion-poster .poster-top,
+.poster.motion-poster .poster-copy,
+.poster.motion-poster .poster-bottom {
+  position: relative;
+  z-index: 2;
+  color: #f5ead8;
+}
+
+.poster.motion-poster .poster-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(245, 234, 216, 0.32);
+}
+
+.poster.motion-poster .poster-top strong {
+  font-family: "Cormorant Garamond", "Bodoni MT", Didot, Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.poster.motion-poster .poster-top span,
+.poster.motion-poster .poster-kicker,
+.poster.motion-poster .poster-bottom {
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 6.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.poster.motion-poster .poster-top span {
+  color: #d9a35e;
+}
+
+.poster.motion-poster .poster-copy {
+  max-width: 100%;
+  margin: 17px 0 0;
+  padding: 0;
+}
+
+.poster.motion-poster .poster-kicker {
+  display: block;
+  margin-bottom: 6px;
+  color: #dfad6c;
+  font-size: 6px;
+  line-height: 1.5;
+}
+
+.poster.motion-poster .poster-copy strong {
+  display: block;
+  margin: 0;
+  font-family: "Cormorant Garamond", "Bodoni MT", Didot, Georgia, serif;
+  font-size: clamp(28px, 3.2vw, 34px);
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
+}
+
+.poster.motion-poster .poster-copy p {
+  max-width: 190px;
+  margin: 7px 0 0;
+  color: rgba(250, 240, 224, 0.94);
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 8px;
+  line-height: 1.45;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.65);
+}
+
+.poster.motion-poster .poster-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid rgba(245, 234, 216, 0.36);
+  color: rgba(250, 240, 224, 0.94);
+  font-size: 6px;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .poster.motion-poster {
+    width: min(100%, 280px) !important;
+    aspect-ratio: 4 / 5 !important;
+    padding: 17px;
+  }
+
+  .poster.motion-poster .poster-copy {
+    margin-top: 16px;
+  }
+
+  .poster.motion-poster .poster-copy strong {
+    font-size: clamp(27px, 8vw, 32px);
+  }
+}
+
+
+/* Três propostas de símbolo no exemplo do chat */
+.coffee-assistant-mark {
+  display: grid;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  margin-top: 2px;
+  place-items: center;
+  border: 1px solid rgba(224, 164, 91, 0.3);
+  border-radius: 9px;
+  background: rgba(224, 164, 91, 0.1);
+}
+
+.coffee-assistant-mark svg {
+  width: 23px;
+  height: 23px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.chips > .chip-option {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+  height: auto;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  cursor: default;
+}
+
+.chips > .chip-option .chip-mark {
+  display: grid;
+  width: 78px;
+  height: 78px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surf);
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.chips > .chip-option.is-selected .chip-mark {
+  border-color: #c98c45;
+  box-shadow: 0 0 22px rgba(201, 140, 69, 0.22);
+}
+
+.chips > .chip-option svg {
+  width: 38px;
+  height: 38px;
+}
+
+.chips > .chip-option .chip-name {
+  color: rgba(255, 255, 255, 0.68);
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .chips > .chip-option .chip-mark {
+    width: 58px;
+    height: 58px;
+    border-radius: 12px;
+  }
+
+  .chips > .chip-option svg {
+    width: 30px;
+    height: 30px;
+  }
+}
