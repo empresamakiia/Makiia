@@ -721,7 +721,7 @@ nav.scrolled .nv {
 /* ===== métricas ===== */
 .met {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
   padding: 80px 0 20px;
   text-align: center;
