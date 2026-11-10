@@ -42,3 +42,10 @@ class TrocarSenhaIn(BaseModel):
     email: EmailStr
     senha_atual: str
     senha_nova: str
+
+
+class LoginResponse(BaseModel):
+    """Resposta do login: o crachá (token) junto com os dados do usuário."""
+    access_token: str
+    token_type: str = "bearer"
+    usuario: UsuarioRead
