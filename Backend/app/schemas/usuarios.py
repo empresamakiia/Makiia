@@ -49,3 +49,13 @@ class LoginResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
     usuario: UsuarioRead
+
+class SolicitarRecuperacaoIn(BaseModel):
+    """Corpo do pedido de recuperação: só precisamos do e-mail."""
+    email: str
+
+
+class RedefinirSenhaIn(BaseModel):
+    """Corpo da redefinição: o token recebido + a nova senha."""
+    token: str
+    senha_nova: str    
