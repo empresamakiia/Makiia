@@ -6,6 +6,9 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import CursorGlow from "./components/CursorGlow/CursorGlow";
 import Chat from "./pages/Chat/Chat";
+import Cookies from "./pages/Cookies/Cookies";
+import CookieBanner from "./components/CookieBanner/CookieBanner";
+import CookieConsentProvider from "./consent/CookieConsentProvider";
 
 function App() {
   useEffect(() => {
@@ -24,14 +27,19 @@ function App() {
 
   return (
     <BrowserRouter>
-      <CursorGlow />
+      <CookieConsentProvider>
+        <CursorGlow />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/cadastro" element={<Register />} />
-        <Route path="/chat" element={<Chat />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/cadastro" element={<Register />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/cookies" element={<Cookies />} />
+        </Routes>
+
+        <CookieBanner />
+      </CookieConsentProvider>
     </BrowserRouter>
   );
 }
