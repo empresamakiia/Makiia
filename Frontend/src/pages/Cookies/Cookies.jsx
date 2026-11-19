@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { LegalFooter, LegalHeader, LegalToc } from "../../components/Legal/Legal";
 import { useCookieConsent } from "../../consent/context";
 import {
   CATEGORIES,
@@ -19,33 +20,10 @@ const CATEGORY_TITLE = Object.fromEntries(
   CATEGORIES.map((c) => [c.id, c.title]),
 );
 
-/* ---------- Menu lateral que acompanha a rolagem ---------- */
-function useActiveSection() {
-  const [active, setActive] = useState(SECTIONS[0].id);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        });
-      },
-      { rootMargin: "-30% 0px -60% 0px" },
-    );
-    SECTIONS.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, []);
-
-  return active;
-}
-
 /* ---------- Interruptor ---------- */
 function Toggle({ checked, disabled, onChange, label, describedBy }) {
   return (
-    <label className={`ck-switch${disabled ? " is-locked" : ""}`}>
+    <label className={`lg-switch${disabled ? " is-locked" : ""}`}>
       <input
         type="checkbox"
         role="switch"
@@ -73,21 +51,21 @@ function PreferencesForm({ savedAt, onSaved }) {
 
   return (
     <>
-      <ul className="ck-prefs">
+      <ul className="lg-prefs">
         {CATEGORIES.map((category) => (
-          <li key={category.id} className="ck-pref">
+          <li key={category.id} className="lg-pref">
             <div>
               <h3>
                 {category.title}
-                {category.locked && <span className="ck-tag">Sempre ativos</span>}
+                {category.locked && <span className="lg-tag">Sempre ativos</span>}
               </h3>
-              <p id={`ck-${category.id}-desc`}>{category.description}</p>
+              <p id={`lg-${category.id}-desc`}>{category.description}</p>
             </div>
             <Toggle
               checked={category.locked || draft[category.id]}
               disabled={category.locked}
               label={category.title}
-              describedBy={`ck-${category.id}-desc`}
+              describedBy={`lg-${category.id}-desc`}
               onChange={(value) =>
                 setDraft((d) => ({ ...d, [category.id]: value }))
               }
@@ -96,23 +74,23 @@ function PreferencesForm({ savedAt, onSaved }) {
         ))}
       </ul>
 
-      <div className="ck-pref-actions">
+      <div className="lg-pref-actions">
         <button
-          className="ck-btn ck-btn--primary"
+          className="lg-btn lg-btn--primary"
           type="button"
           onClick={() => confirm(() => save(draft))}
         >
           Salvar preferências
         </button>
         <button
-          className="ck-btn"
+          className="lg-btn"
           type="button"
           onClick={() => confirm(acceptAll)}
         >
           Aceitar todos
         </button>
         <button
-          className="ck-btn"
+          className="lg-btn"
           type="button"
           onClick={() => confirm(rejectAll)}
         >
@@ -120,7 +98,7 @@ function PreferencesForm({ savedAt, onSaved }) {
         </button>
 
         {savedAt > 0 && (
-          <span className="ck-saved" role="status" key={savedAt}>
+          <span className="lg-saved" role="status" key={savedAt}>
             ✓ Preferências salvas
           </span>
         )}
@@ -132,7 +110,6 @@ function PreferencesForm({ savedAt, onSaved }) {
 /* ---------- Página ---------- */
 export default function Cookies() {
   const { consent, hasConsent } = useCookieConsent();
-  const active = useActiveSection();
   const [filter, setFilter] = useState("all");
   const [savedAt, setSavedAt] = useState(0);
 
@@ -143,54 +120,33 @@ export default function Cookies() {
       : COOKIE_LIST.filter((cookie) => cookie.category === filter);
 
   return (
-    <div className="ck-page">
-      <div className="ck-glow ck-glow--top" aria-hidden="true"></div>
-      <div className="ck-glow ck-glow--bottom" aria-hidden="true"></div>
+    <div className="lg-page">
+      <div className="lg-glow lg-glow--top" aria-hidden="true"></div>
+      <div className="lg-glow lg-glow--bottom" aria-hidden="true"></div>
 
-      <div className="ck-container">
-        {/* ===== Cabeçalho ===== */}
-        <header className="ck-header">
-          <Link to="/" className="ck-logo">
-            MAKIIA
-          </Link>
-
-          <nav className="ck-tabs" aria-label="Políticas">
-            <Link to="/privacidade" className="ck-tab">
-              Privacidade
-            </Link>
-            <Link to="/termos" className="ck-tab">
-              Termos
-            </Link>
-            <Link to="/cookies" className="ck-tab is-active" aria-current="page">
-              Cookies
-            </Link>
-          </nav>
-
-          <a href="mailto:privacidade@makiia.com" className="ck-btn ck-btn--primary ck-btn--sm">
-            Fale com a gente
-          </a>
-        </header>
+      <div className="lg-container">
+        <LegalHeader current="/cookies" />
 
         {/* ===== Destaque ===== */}
-        <section className="ck-hero">
-          <div className="ck-hero__text">
-            <div className="ck-badge">
+        <section className="lg-hero">
+          <div className="lg-hero__text">
+            <div className="lg-badge">
               <span>COOKIES</span>
               Atualizada em 18 de novembro de 2026
             </div>
             <h1>
-              Você escolhe <span className="ck-gradient">quais cookies</span>{" "}
+              Você escolhe <span className="lg-gradient">quais cookies</span>{" "}
               ficam.
             </h1>
-            <p className="ck-lead">
+            <p className="lg-lead">
               Cookies essenciais mantêm a MAKIIA funcionando. Todo o resto só é
               usado com a sua permissão, e você pode mudar de ideia a qualquer
               momento, aqui mesmo.
             </p>
           </div>
 
-          <aside className="ck-summary" aria-label="Resumo das suas escolhas">
-            <div className="ck-summary__count">
+          <aside className="lg-summary" aria-label="Resumo das suas escolhas">
+            <div className="lg-summary__count">
               <strong>
                 {activeCount}
                 <small>/{CATEGORIES.length}</small>
@@ -205,12 +161,12 @@ export default function Cookies() {
               </div>
             </div>
 
-            <ul className="ck-summary__list">
+            <ul className="lg-summary__list">
               {CATEGORIES.map((category) => {
                 const on = hasConsent(category.id);
                 return (
                   <li key={category.id}>
-                    <span className={`ck-dot${on ? " is-on" : ""}`}></span>
+                    <span className={`lg-dot${on ? " is-on" : ""}`}></span>
                     {category.title}
                     <em>{category.locked ? "Sempre ativo" : on ? "Ativo" : "Desligado"}</em>
                   </li>
@@ -218,33 +174,18 @@ export default function Cookies() {
               })}
             </ul>
 
-            <a href="#preferencias" className="ck-btn ck-btn--block">
+            <a href="#preferencias" className="lg-btn lg-btn--block">
               Gerenciar preferências
             </a>
           </aside>
         </section>
 
-        <div className="ck-layout">
-          {/* ===== Menu lateral ===== */}
-          <aside className="ck-toc">
-            <span className="ck-toc__title">Nesta página</span>
-            <ul>
-              {SECTIONS.map(({ id, label }) => (
-                <li key={id}>
-                  <a
-                    href={`#${id}`}
-                    className={`ck-toc__link${active === id ? " is-active" : ""}`}
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </aside>
+        <div className="lg-layout">
+          <LegalToc sections={SECTIONS} />
 
-          <main className="ck-content">
+          <main className="lg-content">
             {/* ===== Preferências ===== */}
-            <section id="preferencias" className="ck-card ck-card--warm">
+            <section id="preferencias" className="lg-card lg-card--warm">
               <h2>Suas preferências</h2>
               <p>
                 Ative ou desative cada categoria. A escolha vale para este
@@ -259,19 +200,19 @@ export default function Cookies() {
             </section>
 
             {/* ===== Lista ===== */}
-            <section id="lista" className="ck-card">
+            <section id="lista" className="lg-card">
               <h2>Lista de cookies</h2>
               <p>
                 Todos os cookies que a MAKIIA pode gravar no seu navegador, por
                 categoria.
               </p>
 
-              <div className="ck-chips" role="group" aria-label="Filtrar por categoria">
+              <div className="lg-chips" role="group" aria-label="Filtrar por categoria">
                 {[{ id: "all", title: "Todos" }, ...CATEGORIES].map((c) => (
                   <button
                     key={c.id}
                     type="button"
-                    className={`ck-chip${filter === c.id ? " is-active" : ""}`}
+                    className={`lg-chip${filter === c.id ? " is-active" : ""}`}
                     aria-pressed={filter === c.id}
                     onClick={() => setFilter(c.id)}
                   >
@@ -280,8 +221,8 @@ export default function Cookies() {
                 ))}
               </div>
 
-              <div className="ck-table-wrap">
-                <table className="ck-table">
+              <div className="lg-table-wrap">
+                <table className="lg-table">
                   <thead>
                     <tr>
                       <th scope="col">Nome</th>
@@ -298,18 +239,18 @@ export default function Cookies() {
                           <code>{cookie.name}</code>
                         </td>
                         <td>
-                          <span className={`ck-cat ck-cat--${cookie.category}`}>
+                          <span className={`lg-cat lg-cat--${cookie.category}`}>
                             {CATEGORY_TITLE[cookie.category]}
                           </span>
                         </td>
                         <td>{cookie.purpose}</td>
                         <td>{cookie.provider}</td>
-                        <td className="ck-nowrap">{cookie.duration}</td>
+                        <td className="lg-nowrap">{cookie.duration}</td>
                       </tr>
                     ))}
                     {rows.length === 0 && (
                       <tr>
-                        <td colSpan={5} className="ck-empty">
+                        <td colSpan={5} className="lg-empty">
                           Nenhum cookie desta categoria é usado hoje.
                         </td>
                       </tr>
@@ -320,7 +261,7 @@ export default function Cookies() {
             </section>
 
             {/* ===== Tecnologias parecidas ===== */}
-            <section id="tecnologias" className="ck-card">
+            <section id="tecnologias" className="lg-card">
               <h2>Tecnologias parecidas</h2>
               <p>
                 Além de cookies, sites podem usar o armazenamento local do
@@ -332,7 +273,7 @@ export default function Cookies() {
             </section>
 
             {/* ===== Como apagar ===== */}
-            <section id="apagar" className="ck-card">
+            <section id="apagar" className="lg-card">
               <h2>Como apagar cookies</h2>
               <p>
                 Ao desligar uma categoria nesta página, apagamos na hora os
@@ -341,7 +282,7 @@ export default function Cookies() {
                 Configurações → Privacidade e segurança; no Safari, em Ajustes →
                 Privacidade.
               </p>
-              <div className="ck-callout">
+              <div className="lg-callout">
                 <strong>Atenção:</strong> apagar os cookies essenciais pode
                 desconectar você da sua conta, e o aviso de cookies vai aparecer
                 de novo na próxima visita.
@@ -349,12 +290,12 @@ export default function Cookies() {
             </section>
 
             {/* ===== Chamada ===== */}
-            <section className="ck-cta">
+            <section className="lg-cta">
               <div>
                 <h2>Quer saber como tratamos seus dados?</h2>
                 <p>A Política de Privacidade explica tudo, em linguagem direta.</p>
               </div>
-              <Link to="/privacidade" className="ck-btn ck-btn--primary">
+              <Link to="/privacidade" className="lg-btn lg-btn--primary">
                 Ver Política de Privacidade
               </Link>
             </section>
@@ -362,32 +303,7 @@ export default function Cookies() {
         </div>
       </div>
 
-      {/* ===== Rodapé ===== */}
-      <footer className="ck-footer">
-        <div className="ck-footer__inner">
-          <div className="ck-footer__brand">
-            <Link to="/" className="ck-logo">
-              MAKIIA
-            </Link>
-            <p>Identidade visual e peças de marca com IA, do briefing ao ar.</p>
-            <small>© 2026 MAKIIA. Todos os direitos reservados.</small>
-          </div>
-
-          <nav aria-label="Links legais">
-            <span>Legal</span>
-            <Link to="/privacidade">Política de Privacidade</Link>
-            <Link to="/termos">Termos de Uso</Link>
-            <Link to="/cookies" aria-current="page">
-              Política de Cookies
-            </Link>
-          </nav>
-
-          <div>
-            <span>Contato</span>
-            <a href="mailto:privacidade@makiia.com">privacidade@makiia.com</a>
-          </div>
-        </div>
-      </footer>
+      <LegalFooter current="/cookies" />
     </div>
   );
 }
