@@ -775,7 +775,7 @@ export default function Home() {
             <div>
               <h4>Legal</h4>
               <a href="/termos">Termos de uso</a>
-              <a href="#">Privacidade</a>
+              <a href="/privacidade">Privacidade</a>
               <a href="/cookies">Cookies</a>
             </div>
           </div>

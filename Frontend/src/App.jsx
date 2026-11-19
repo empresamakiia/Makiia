@@ -8,6 +8,7 @@ import CursorGlow from "./components/CursorGlow/CursorGlow";
 import Chat from "./pages/Chat/Chat";
 import Cookies from "./pages/Cookies/Cookies";
 import TermosDeUso from "./pages/TermodeUso/TermosdeUso";
+import PoliticaPrivacidade from "./pages/Privacidade/Privacidade";
 import CookieBanner from "./components/CookieBanner/CookieBanner";
 import CookieConsentProvider from "./consent/CookieConsentProvider";
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/chat" element={<Chat />} />
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/termos" element={<TermosDeUso />} />
+          <Route path="/privacidade" element={<PoliticaPrivacidade />} />
         </Routes>
 
         <CookieBanner />

@@ -1,11 +1,5 @@
 /* Estilos só dos Termos de Uso. A base está em components/Legal/Legal.css */
 
-.tu-icon {
-  width: 1.15rem;
-  height: 1.15rem;
-  flex-shrink: 0;
-}
-
 /* ---------- Destaque ---------- */
 .tu-hero-actions {
   display: flex;
@@ -15,124 +9,6 @@
   animation: lg-rise 0.8s var(--ease) 0.2s backwards;
 }
 
-.tu-summary__bar {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding-bottom: 0.9rem;
-  border-bottom: 1px solid var(--line);
-}
-
-.tu-summary__bar span {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: #3a3345;
-}
-
-.tu-summary__bar span:nth-child(1) {
-  background: #ff6b7a;
-}
-
-.tu-summary__bar span:nth-child(2) {
-  background: #ffbd4a;
-}
-
-.tu-summary__bar span:nth-child(3) {
-  background: #4ade80;
-}
-
-.tu-summary__bar p {
-  margin: 0 0 0 auto;
-  color: var(--muted-2);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-}
-
-.tu-summary ul {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  margin: 0.8rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.tu-summary li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.85rem;
-  padding: 0.7rem 0.4rem;
-  border-radius: 0.8rem;
-  transition: background 0.2s ease;
-}
-
-.tu-summary li:hover {
-  background: rgb(255 255 255 / 3%);
-}
-
-.tu-summary li > .tu-icon {
-  box-sizing: content-box;
-  padding: 0.5rem;
-  border: 1px solid rgb(224 71 143 / 35%);
-  border-radius: 0.65rem;
-  color: #f0a2c8;
-  background: linear-gradient(145deg, rgb(138 77 255 / 22%), rgb(224 71 143 / 16%));
-}
-
-.tu-summary strong {
-  display: block;
-  margin-bottom: 0.15rem;
-  font-size: 0.9rem;
-}
-
-.tu-summary li p {
-  margin: 0;
-  color: var(--muted-2);
-  font-size: 0.8rem;
-  line-height: 1.5;
-}
-
-/* ---------- Resumo em blocos ---------- */
-.tu-tiles {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.7rem;
-  margin-top: 1.3rem;
-}
-
-.tu-tile {
-  padding: 1.1rem;
-  border: 1px solid var(--line);
-  border-radius: 1rem;
-  background: rgb(255 255 255 / 2.5%);
-  transition:
-    border-color 0.25s ease,
-    transform 0.3s var(--ease);
-}
-
-.tu-tile:hover {
-  border-color: rgb(224 71 143 / 35%);
-  transform: translateY(-2px);
-}
-
-.tu-tile .tu-icon {
-  color: #f0a2c8;
-}
-
-.tu-tile strong {
-  display: block;
-  margin: 0.7rem 0 0.3rem;
-  font-size: 0.92rem;
-}
-
-.tu-tile p {
-  margin: 0;
-  color: var(--muted-2);
-  font-size: 0.82rem;
-  line-height: 1.55;
-}
 
 /* ---------- Seções numeradas ---------- */
 .tu-section h2 {
@@ -157,74 +33,8 @@
   font-variant-numeric: tabular-nums;
 }
 
-.tu-section > p + p {
-  margin-top: 0.8rem;
-}
-
-.tu-section a,
-.lg-card > p a {
-  color: #d9c6ff;
-  text-decoration: underline;
-  text-decoration-color: rgb(217 198 255 / 40%);
-  text-underline-offset: 0.2em;
-}
-
-.tu-section a:hover {
-  color: #fff;
-}
-
-.tu-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  margin: 0.4rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.tu-section > p + .tu-list {
-  margin-top: 0.9rem;
-}
-
-.tu-list li {
-  position: relative;
-  padding-left: 1.6rem;
-  color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.65;
-}
-
-.tu-list li::before {
-  content: "";
-  position: absolute;
-  top: 0.55rem;
-  left: 0.3rem;
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 50%;
-  background: var(--grad);
-}
-
-/* Lista do que não pode: marcador de "x" */
-.tu-list--no li::before {
-  content: "×";
-  top: 0.05rem;
-  left: 0.2rem;
-  width: auto;
-  height: auto;
-  border-radius: 0;
-  background: none;
-  color: #ff6b7a;
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-
 /* ---------- Responsivo ---------- */
 @media (max-width: 720px) {
-  .tu-tiles {
-    grid-template-columns: 1fr;
-  }
-
   .tu-hero-actions .lg-btn {
     flex: 1 1 100%;
   }
@@ -266,7 +76,7 @@
 
   .tu-page .lg-hero h1,
   .tu-page .lg-card h2,
-  .tu-tile strong {
+  .lg-tile strong {
     color: #111;
   }
 
@@ -276,8 +86,8 @@
   }
 
   .tu-page p,
-  .tu-list li,
-  .tu-tile p,
+  .lg-list li,
+  .lg-tile p,
   .tu-page .lg-callout {
     color: #333 !important;
   }

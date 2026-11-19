@@ -175,64 +175,6 @@
   background: var(--grad);
 }
 
-.lg-table-wrap {
-  overflow-x: auto;
-  border: 1px solid var(--line);
-  border-radius: 0.9rem;
-}
-
-.lg-table {
-  width: 100%;
-  min-width: 40rem;
-  border-collapse: collapse;
-  font-size: 0.84rem;
-}
-
-.lg-table th,
-.lg-table td {
-  padding: 0.85rem 1rem;
-  text-align: left;
-  vertical-align: top;
-}
-
-.lg-table th {
-  color: var(--muted-2);
-  background: rgb(255 255 255 / 3%);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.lg-table td {
-  border-top: 1px solid var(--line);
-  color: #d4cde0;
-  line-height: 1.5;
-}
-
-.lg-table tbody tr {
-  animation: lg-row 0.35s var(--ease) backwards;
-}
-
-@keyframes lg-row {
-  from {
-    opacity: 0;
-    transform: translateY(0.3rem);
-  }
-}
-
-.lg-table code {
-  padding: 0.15rem 0.45rem;
-  border-radius: 0.4rem;
-  color: #e8dcff;
-  background: rgb(255 255 255 / 6%);
-  font-size: 0.8rem;
-}
-
-.lg-nowrap {
-  white-space: nowrap;
-}
-
 .lg-table .lg-empty {
   padding: 1.6rem 1rem;
   color: var(--muted-2);

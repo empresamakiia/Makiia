@@ -62,7 +62,7 @@ const ICONS = {
 function Icon({ name }) {
   return (
     <svg
-      className="tu-icon"
+      className="lg-icon"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -127,14 +127,14 @@ export default function TermosDeUso() {
             </div>
           </div>
 
-          <aside className="lg-summary tu-summary" aria-label="Em resumo">
-            <div className="tu-summary__bar">
+          <aside className="lg-summary" aria-label="Em resumo">
+            <div className="lg-summary__bar">
               <span></span>
               <span></span>
               <span></span>
               <p>MAKIIA · EM RESUMO</p>
             </div>
-            <ul>
+            <ul className="lg-summary-list">
               <li>
                 <Icon name="spark" />
                 <div>
@@ -178,8 +178,8 @@ export default function TermosDeUso() {
                 O essencial destes termos. O resumo ajuda, mas o texto completo
                 abaixo é o que vale.
               </p>
-              <div className="tu-tiles">
-                <div className="tu-tile">
+              <div className="lg-tiles">
+                <div className="lg-tile">
                   <Icon name="spark" />
                   <strong>Você é dono do que cria</strong>
                   <p>
@@ -187,7 +187,7 @@ export default function TermosDeUso() {
                     comercial.
                   </p>
                 </div>
-                <div className="tu-tile">
+                <div className="lg-tile">
                   <Icon name="shield" />
                   <strong>Use com responsabilidade</strong>
                   <p>
@@ -195,7 +195,7 @@ export default function TermosDeUso() {
                     outras pessoas e marcas.
                   </p>
                 </div>
-                <div className="tu-tile">
+                <div className="lg-tile">
                   <Icon name="card" />
                   <strong>Pague só pelo que usa</strong>
                   <p>
@@ -203,7 +203,7 @@ export default function TermosDeUso() {
                     assinatura.
                   </p>
                 </div>
-                <div className="tu-tile">
+                <div className="lg-tile">
                   <Icon name="eye" />
                   <strong>A IA pode errar</strong>
                   <p>
@@ -237,7 +237,7 @@ export default function TermosDeUso() {
             </Section>
 
             <Section id="conta" number={3} title="Sua conta">
-              <ul className="tu-list">
+              <ul className="lg-list">
                 <li>Informe dados verdadeiros e mantenha-os atualizados.</li>
                 <li>
                   Guarde sua senha com cuidado: o que for feito na sua conta é
@@ -255,7 +255,7 @@ export default function TermosDeUso() {
                 Use a MAKIIA para criar e divulgar marcas de forma legítima. Não
                 é permitido:
               </p>
-              <ul className="tu-list tu-list--no">
+              <ul className="lg-list lg-list--no">
                 <li>
                   Criar conteúdo ilegal, discriminatório, violento, sexual
                   envolvendo menores ou que incentive ódio.
@@ -280,7 +280,7 @@ export default function TermosDeUso() {
             </Section>
 
             <Section id="planos" number={5} title="Planos, pagamentos e cancelamento">
-              <ul className="tu-list">
+              <ul className="lg-list">
                 <li>
                   Os preços e limites de cada plano aparecem na página de planos
                   antes da contratação.
@@ -382,7 +382,7 @@ export default function TermosDeUso() {
             </Section>
 
             <Section id="encerramento" number={12} title="Suspensão e encerramento">
-              <ul className="tu-list">
+              <ul className="lg-list">
                 <li>
                   Você pode excluir sua conta quando quiser, nas configurações.
                 </li>
