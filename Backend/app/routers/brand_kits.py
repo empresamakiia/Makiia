@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
+from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 
 from app.database.session import SessionLocal
@@ -6,6 +7,7 @@ from app.dependencias import get_usuario_logado
 from app.models.brand_kits import BrandKit
 from app.models.usuarios import Usuario
 from app.schemas.brand_kits import BrandKitCreate, BrandKitRead, BrandKitUpdate
+from app.services.armazenamento import localizar_logo, remover_logo, salvar_logo
 
 router = APIRouter(prefix="/brand-kits", tags=["Brand Kits"])
 
@@ -105,4 +107,33 @@ def remover_brand_kit(
     kit = buscar_do_dono(db, id_brand_kit, usuario)
     db.delete(kit)
     db.commit()
+    remover_logo(id_brand_kit)
     return {"mensagem": "Brand Kit removido com sucesso"}
+
+
+@router.post("/{id_brand_kit}/logo", response_model=BrandKitRead)
+def enviar_logo(
+    id_brand_kit: int,
+    arquivo: UploadFile = File(...),
+    db: Session = Depends(get_db),
+    usuario: Usuario = Depends(get_usuario_logado),
+):
+    kit = buscar_do_dono(db, id_brand_kit, usuario)
+    salvar_logo(id_brand_kit, arquivo)
+    kit.logo_url = f"/brand-kits/{id_brand_kit}/logo"
+    db.commit()
+    db.refresh(kit)
+    return kit
+
+
+@router.get("/{id_brand_kit}/logo")
+def obter_logo(
+    id_brand_kit: int,
+    db: Session = Depends(get_db),
+    usuario: Usuario = Depends(get_usuario_logado),
+):
+    buscar_do_dono(db, id_brand_kit, usuario)
+    caminho = localizar_logo(id_brand_kit)
+    if not caminho:
+        raise HTTPException(status_code=404, detail="Este Brand Kit ainda não tem logo")
+    return FileResponse(caminho)
