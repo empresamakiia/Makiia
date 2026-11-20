@@ -173,6 +173,8 @@ export default function initLanding() {
     later(revealArtwork, 650);
   };
 
+  // Demo de digitação: só existe na landing (outras páginas reutilizam o init).
+  if (typed && caret && rs) {
   typed.textContent = "";
   caret.classList.remove("off");
   rs.textContent = "Esculpindo…";
@@ -205,6 +207,7 @@ export default function initLanding() {
     };
 
     later(tick, 900);
+  }
   }
 
   const cv = $("#bg"),
@@ -366,7 +369,7 @@ export default function initLanding() {
       });
     }
 
-    if (steps.length) {
+    if (steps.length && fill && howR) {
       let best = 0,
         bd = 1e9;
 
@@ -453,19 +456,21 @@ export default function initLanding() {
   const stage = $("#stage"),
     win = $("#win");
 
-  on(stage, "pointermove", (e) => {
-    if (calm || e.pointerType === "touch") return;
+  if (stage && win) {
+    on(stage, "pointermove", (e) => {
+      if (calm || e.pointerType === "touch") return;
 
-    const r = stage.getBoundingClientRect(),
-      dx = (e.clientX - r.left) / r.width - 0.5,
-      dy = (e.clientY - r.top) / r.height - 0.5;
+      const r = stage.getBoundingClientRect(),
+        dx = (e.clientX - r.left) / r.width - 0.5,
+        dy = (e.clientY - r.top) / r.height - 0.5;
 
-    win.style.transform = `rotateY(${dx * 5}deg) rotateX(${-dy * 4}deg)`;
-  });
+      win.style.transform = `rotateY(${dx * 5}deg) rotateX(${-dy * 4}deg)`;
+    });
 
-  on(stage, "pointerleave", () => {
-    win.style.transform = "";
-  });
+    on(stage, "pointerleave", () => {
+      win.style.transform = "";
+    });
+  }
 
   const burger = $("#burger"),
     lk = $("#lk");

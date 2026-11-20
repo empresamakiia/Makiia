@@ -5,6 +5,7 @@ import "./Home.css";
 import "./Home-poster.css";
 import brasaPosterBg from "../../assets/brasa-poster-bg.png";
 
+
 export default function Home() {
   useEffect(() => initLanding(), []);
 
@@ -75,11 +76,6 @@ export default function Home() {
       </nav>
 
       <main id="top">
-        <div className="ambient-signature" aria-hidden="true">
-          <span>O</span>
-          <span>R</span>
-        </div>
-
         <header className="w hero">
           <span className="pill rv">
             <b>NOVO</b>MAKIIA 2 com raciocínio criativo estendido
@@ -767,7 +763,7 @@ export default function Home() {
             </div>
             <div>
               <h4>Empresa</h4>
-              <a href="#">Sobre</a>
+              <a href="/sobre">Sobre</a>
               <a href="#">Blog</a>
               <a href="#">Contato</a>
               <a href="#">Ajuda</a>

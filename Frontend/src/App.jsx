@@ -6,10 +6,15 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import CursorGlow from "./components/CursorGlow/CursorGlow";
 import Chat from "./pages/Chat/Chat";
+
+// Páginas adicionadas pela equipe
 import Cookies from "./pages/Cookies/Cookies";
 import TermosDeUso from "./pages/TermodeUso/TermosdeUso";
 import CookieBanner from "./components/CookieBanner/CookieBanner";
 import CookieConsentProvider from "./consent/CookieConsentProvider";
+
+// Página Sobre
+import Sobre from "./pages/Sobre/Sobre";
 
 function App() {
   useEffect(() => {
@@ -38,6 +43,7 @@ function App() {
           <Route path="/chat" element={<Chat />} />
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/termos" element={<TermosDeUso />} />
+          <Route path="/sobre" element={<Sobre />} />
         </Routes>
 
         <CookieBanner />
