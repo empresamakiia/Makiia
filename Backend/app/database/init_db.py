@@ -13,7 +13,7 @@ from app.models.auditoria_eventos import AuditoriaEvento
 from app.models.solicitacoes_ia import SolicitacaoIA
 from app.models.execucoes_ia import ExecucaoIA
 from app.models.arquivos import Arquivo
-
+from app.models.brand_kits import BrandKit
 
 def criar_tabelas():
     Base.metadata.create_all(bind=engine)

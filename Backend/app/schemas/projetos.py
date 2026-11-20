@@ -4,11 +4,20 @@ from pydantic import BaseModel, ConfigDict
 
 
 class ProjetoCreate(BaseModel):
-    """Dados que a API aceita para criar um projeto."""
-    id_usuario: int
+    """Dados que a API aceita para criar um projeto.
+
+    O dono (id_usuario) NÃO vem daqui: quem decide é o token.
+    """
     nome: str
     descricao: str | None = None
     status: str = "ativo"
+
+
+class ProjetoUpdate(BaseModel):
+    """Campos opcionais: só altera o que o cliente realmente enviar."""
+    nome: str | None = None
+    descricao: str | None = None
+    status: str | None = None
 
 
 class ProjetoRead(BaseModel):
