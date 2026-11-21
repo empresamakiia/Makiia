@@ -1,13 +1,17 @@
 from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy import func
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.database.session import SessionLocal
 from app.dependencias import get_usuario_logado
+from app.models.perfis import Perfil
 from app.models.recuperacoes_senha import RecuperacaoSenha
 from app.models.usuarios import Usuario
 from app.schemas.usuarios import (
+    CadastroIn,
     LoginIn,
     LoginResponse,
     RedefinirSenhaIn,
@@ -45,6 +49,44 @@ def login(dados: LoginIn, db: Session = Depends(get_db)):
     # Autenticou: emite o crachá que mantém o usuário logado
     token = criar_token_acesso(usuario.id_usuario)
     return LoginResponse(access_token=token, usuario=usuario)
+
+
+# Perfil atribuído a quem cria a conta pelo site (o cliente não escolhe o perfil)
+PERFIL_PADRAO_CADASTRO = "Usuário"
+
+
+@router.post("/cadastro", response_model=LoginResponse, status_code=status.HTTP_201_CREATED)
+def cadastrar(dados: CadastroIn, db: Session = Depends(get_db)):
+    """Cria a conta com o perfil padrão e já devolve o token (usuário entra logado)."""
+    email = dados.email.strip().lower()
+
+    # E-mail único sem diferenciar maiúsculas/minúsculas
+    if db.query(Usuario).filter(func.lower(Usuario.email) == email).first():
+        raise HTTPException(status_code=409, detail="Já existe uma conta com esse e-mail")
+
+    perfil = db.query(Perfil).filter(Perfil.nome == PERFIL_PADRAO_CADASTRO).first()
+    if not perfil:
+        perfil = Perfil(nome=PERFIL_PADRAO_CADASTRO, descricao="Perfil padrão de quem cria a conta pelo site")
+        db.add(perfil)
+        db.flush()
+
+    novo = Usuario(
+        id_perfil=perfil.id_perfil,
+        nome=dados.nome,
+        email=email,
+        senha_hash=gerar_hash_senha(dados.senha),
+        ativo=True,
+    )
+    db.add(novo)
+    try:
+        db.commit()
+    except IntegrityError:  # dois cadastros simultâneos com o mesmo e-mail
+        db.rollback()
+        raise HTTPException(status_code=409, detail="Já existe uma conta com esse e-mail")
+    db.refresh(novo)
+
+    token = criar_token_acesso(novo.id_usuario)
+    return LoginResponse(access_token=token, usuario=novo)
 
 
 @router.get("/me", response_model=UsuarioRead)
