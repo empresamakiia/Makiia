@@ -98,7 +98,7 @@ button {
   margin-top: 22px;
 }
 
-.mk-side-group > p {
+.mk-side-group>p {
   margin: 0 8px 12px;
   color: #a09aa9;
   font-weight: 600;
@@ -480,7 +480,7 @@ button {
   min-width: 0;
 }
 
-.mk-output-data > strong {
+.mk-output-data>strong {
   font-size: 13px;
 }
 
@@ -492,13 +492,11 @@ button {
 }
 
 .mk-poster-art {
-  background: radial-gradient(
-    ellipse at 52% 27%,
-    #ff9653 0,
-    #f15d61 38%,
-    #ae327d 70%,
-    #6339fa 100%
-  );
+  background: radial-gradient(ellipse at 52% 27%,
+      #ff9653 0,
+      #f15d61 38%,
+      #ae327d 70%,
+      #6339fa 100%);
   border-radius: 12px;
   display: grid;
   place-items: center;
@@ -988,6 +986,7 @@ button {
 }
 
 @media print {
+
   .mk-sidebar,
   .mk-brandkit,
   .mk-header,
@@ -1419,7 +1418,7 @@ button {
   color: #d5b8fd;
 }
 
-.mk-tool-option > span:nth-child(2) {
+.mk-tool-option>span:nth-child(2) {
   flex: 1;
   min-width: 0;
 }
@@ -1829,5 +1828,958 @@ button {
 
   .mk-demo-tiles {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Refinamentos: conta real, seletor e estados de API */
+.mk-account-control {
+  position: relative;
+}
+
+.mk-account-button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  color: inherit;
+  padding: 14px 0 20px;
+}
+
+.mk-account-details {
+  min-width: 0;
+  flex: 1;
+}
+
+.mk-account-details strong,
+.mk-account-details small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mk-account-details small {
+  max-width: 155px;
+}
+
+.mk-account-button:hover {
+  background: #ffffff08;
+  border-radius: 12px;
+}
+
+.mk-account-menu {
+  position: absolute;
+  bottom: 72px;
+  left: 0;
+  right: 0;
+  background: #191320;
+  border: 1px solid #443650;
+  border-radius: 12px;
+  box-shadow: 0 12px 35px #0008;
+  padding: 7px;
+  z-index: 55;
+}
+
+.mk-account-menu button,
+.mk-account-menu a {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: 0;
+  background: transparent;
+  color: #f4f0fa;
+  text-align: left;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.mk-account-menu button:hover,
+.mk-account-menu a:hover {
+  background: #30213b;
+}
+
+.mk-model-empty {
+  color: #aaa0b6;
+  line-height: 1.65;
+  font-size: 11px;
+  padding: 5px 10px 12px;
+}
+
+.mk-model-popover {
+  max-height: min(70vh, 450px);
+  overflow-y: auto;
+}
+
+.mk-model-trigger {
+  max-width: 215px;
+}
+
+.mk-model-trigger i {
+  flex-shrink: 0;
+}
+
+.mk-send:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+@media (max-width: 660px) {
+  .mk-account-details small {
+    max-width: 145px;
+  }
+}
+
+
+/* Sprint 2 — refinamento editorial do chat e catálogo visual de IAs */
+.mk-shell {
+  --stroke: #312b3c;
+}
+
+.mk-sidebar {
+  border-right-color: #30283b;
+}
+
+.mk-header {
+  backdrop-filter: blur(16px);
+  background: rgba(15, 10, 23, .72);
+}
+
+.mk-new-btn {
+  border-radius: 12px;
+  box-shadow: 0 7px 18px #892cf421;
+}
+
+.mk-new-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.mk-search:focus-within {
+  border-color: #7752b8;
+  box-shadow: 0 0 0 3px #7945b417;
+}
+
+.mk-project.active {
+  background: #231a30;
+  border-color: #4a365e;
+}
+
+.mk-account-button {
+  border-top: 1px solid #2e2737;
+}
+
+.mk-avatar {
+  background: linear-gradient(135deg, #7544f8, #c34793 65%, #f28b59);
+}
+
+.mk-chat-content {
+  max-width: 760px;
+}
+
+.mk-user-bubble {
+  background: #191320;
+  border-color: #453550;
+  box-shadow: none;
+}
+
+.mk-output-card,
+.mk-logo-card {
+  border-color: #3a3044;
+}
+
+.mk-composer {
+  border-width: 1px;
+  border-color: #584070;
+  background: #120e1a;
+  box-shadow: 0 15px 45px #0005;
+}
+
+.mk-composer:focus-within {
+  border-color: #8862bc;
+  box-shadow: 0 0 0 3px #8660bf16;
+}
+
+.mk-composer textarea {
+  line-height: 1.7;
+}
+
+.mk-disclaimer {
+  color: #8f849b;
+}
+
+.mk-ai-catalog {
+  width: min(390px, calc(100vw - 24px));
+  max-height: min(75dvh, 580px);
+  padding: 14px;
+}
+
+.mk-ai-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 3px 12px;
+}
+
+.mk-ai-heading strong,
+.mk-ai-heading small {
+  display: block;
+}
+
+.mk-ai-heading strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.mk-ai-heading small {
+  color: #aba0b7;
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.mk-ai-heading button {
+  border: 1px solid #3b3147;
+  width: 29px;
+  height: 29px;
+  border-radius: 9px;
+  background: #241b30;
+  display: grid;
+  place-items: center;
+}
+
+.mk-ai-search {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.mk-ai-search input {
+  display: block;
+  width: 100%;
+  height: 39px;
+  border: 1px solid #493852;
+  border-radius: 11px;
+  background: #110d19;
+  color: #f8f4fd;
+  padding: 0 12px;
+  font-size: 11px;
+  outline: none;
+}
+
+.mk-ai-search input:focus {
+  border-color: #a16cdd;
+}
+
+.mk-ai-filters {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scrollbar-width: thin;
+}
+
+.mk-ai-filters button {
+  border: 1px solid #3c304a;
+  border-radius: 30px;
+  background: #1c1626;
+  color: #a99bb7;
+  padding: 7px 10px;
+  white-space: nowrap;
+  font-size: 10px;
+}
+
+.mk-ai-filters button.active {
+  border-color: #9464d1;
+  color: #faf5ff;
+  background: #392248;
+}
+
+.mk-ai-results {
+  max-height: 280px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.mk-ai-option {
+  gap: 11px;
+  padding: 10px 9px;
+  min-height: 64px;
+}
+
+.mk-ai-option-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.mk-ai-option-info small {
+  line-height: 1.4;
+}
+
+.mk-ai-monogram {
+  width: 35px;
+  height: 35px;
+  flex: 0 0 35px;
+  border: 1px solid #604373;
+  background: linear-gradient(135deg, #362448, #23192d);
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #d8b9f7;
+}
+
+.mk-ai-footnote {
+  border-top: 1px solid #382b43;
+  color: #9f92ac;
+  font-size: 10px;
+  line-height: 1.6;
+  margin: 8px 2px 0;
+  padding: 11px 3px 0;
+}
+
+.mk-selected-ai {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mk-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media(max-width:660px) {
+  .mk-ai-catalog {
+    right: -2px;
+    width: min(340px, calc(100vw - 18px));
+    max-height: min(72dvh, 520px);
+  }
+
+  .mk-model-trigger {
+    width: 39px;
+    min-width: 39px;
+  }
+
+  .mk-selected-ai {
+    display: none;
+  }
+
+  .mk-chat-content {
+    padding-top: 25px;
+  }
+}
+
+/* =====================================================================
+   Logo da MAKIIA na sidebar
+   ===================================================================== */
+.mk-brand-logo.mk-brand-home {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 4px 6px 2px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: opacity 0.2s;
+}
+
+.mk-brand-home:hover {
+  opacity: 0.85;
+}
+
+.mk-brand-home .brand-logo {
+  gap: 11px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+}
+
+.mk-brand-home small {
+  padding-left: 41px;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #8e84a0;
+}
+
+/* =====================================================================
+   Seletor de IA (AiPicker.jsx)
+   ===================================================================== */
+.ai-picker,
+.ai-panel {
+  --ai-text: #8b6cff;
+  --ai-image: #e0588a;
+  --ai-video: #ff9a5c;
+  --ai-audio: #ffc560;
+  --ai-edit: #4fc7b8;
+}
+
+.tone-text { --tone: var(--ai-text); }
+.tone-image { --tone: var(--ai-image); }
+.tone-video { --tone: var(--ai-video); }
+.tone-audio { --tone: var(--ai-audio); }
+.tone-edit { --tone: var(--ai-edit); }
+
+/* botão no cabeçalho (mais específico que as regras antigas que o escondiam no celular) */
+.mk-header-actions .ai-picker > .ai-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  width: auto;
+  min-width: 0;
+  max-width: 230px;
+  height: 38px;
+  padding: 0 12px 0 6px;
+  border: 1px solid #5b3fa0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(123, 77, 255, 0.16), rgba(123, 77, 255, 0.06));
+  color: #f4f0ff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.mk-header-actions .ai-picker > .ai-trigger:hover,
+.mk-header-actions .ai-picker.is-open > .ai-trigger {
+  border-color: #9a7bff;
+  background: linear-gradient(180deg, rgba(123, 77, 255, 0.24), rgba(123, 77, 255, 0.1));
+}
+
+.ai-trigger-icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: var(--tone);
+  background: color-mix(in srgb, var(--tone) 18%, transparent);
+}
+
+.ai-trigger-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.mk-header-actions .ai-picker .ai-trigger-chevron {
+  display: block;
+  flex: none;
+  margin-left: 0;
+  opacity: 0.7;
+  transition: transform 0.2s;
+}
+
+.ai-picker.is-open .ai-trigger-chevron {
+  transform: rotate(180deg);
+}
+
+/* painel (desktop/tablet): fixo abaixo do botão; top/right vêm do componente */
+.ai-panel {
+  position: fixed;
+  top: 84px;
+  right: 16px;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  width: min(660px, calc(100vw - 40px));
+  max-height: min(640px, calc(100dvh - 96px));
+  padding: 16px 16px 12px;
+  border: 1px solid #3d3150;
+  border-radius: 20px;
+  background: #15101d;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(123, 77, 255, 0.08);
+  color: #f4f0ff;
+  text-align: left;
+  animation: ai-panel-in 0.18s ease both;
+}
+
+@keyframes ai-panel-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.ai-sheet-backdrop,
+.ai-sheet-grip {
+  display: none;
+}
+
+/* partes fixas do painel não encolhem; só a lista rola */
+.ai-panel-head,
+.ai-search,
+.ai-filters,
+.ai-footnote {
+  flex: none;
+}
+
+.ai-group {
+  margin: 0;
+  padding: 0;
+}
+
+.ai-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.ai-panel-head strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ai-panel-head small {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  color: #9b91ab;
+}
+
+.ai-close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #3d3150;
+  border-radius: 10px;
+  background: #1f1829;
+  color: #e9e3f5;
+  cursor: pointer;
+}
+
+.ai-close:hover {
+  border-color: #6c55a0;
+  background: #2a2138;
+}
+
+.ai-search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #3a2f4a;
+  border-radius: 12px;
+  background: #0f0b15;
+  color: #8e84a0;
+}
+
+.ai-search:focus-within {
+  border-color: #8b6cff;
+  box-shadow: 0 0 0 3px rgba(139, 108, 255, 0.15);
+}
+
+.ai-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+}
+
+.ai-search input::placeholder {
+  color: #7c7290;
+}
+
+.ai-search button {
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  color: #b3a9c4;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.ai-filters {
+  display: flex;
+  gap: 6px;
+  margin: 12px 0 4px;
+  padding-bottom: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ai-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.ai-filters button {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 11px;
+  border: 1px solid #3a2f4a;
+  border-radius: 999px;
+  background: #1b1524;
+  color: #cfc7dd;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.ai-filters button svg {
+  color: var(--tone, currentColor);
+}
+
+.ai-filters button:hover:not(:disabled) {
+  border-color: #5c4a78;
+}
+
+.ai-filters button.active {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: linear-gradient(90deg, rgba(123, 77, 255, 0.78), rgba(205, 94, 150, 0.72));
+  color: #fff;
+}
+
+.ai-filters button.active svg {
+  color: #fff;
+}
+
+.ai-filters button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.ai-count {
+  min-width: 18px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 10px;
+  text-align: center;
+}
+
+.ai-results {
+  flex: 1;
+  min-height: 0;
+  margin: 8px -6px 0;
+  padding: 0 6px 4px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.ai-group + .ai-group {
+  margin-top: 14px;
+}
+
+.ai-group h4 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 6px 2px 8px;
+  color: var(--tone);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.ai-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.ai-option {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  padding: 10px 11px;
+  border: 1px solid #2f2640;
+  border-radius: 14px;
+  background: #1a1423;
+  color: #f4f0ff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+
+.ai-option:hover {
+  border-color: color-mix(in srgb, var(--tone) 55%, #2f2640);
+  background: #201929;
+  transform: translateY(-1px);
+}
+
+.ai-option.chosen {
+  border-color: color-mix(in srgb, var(--tone) 80%, transparent);
+  background: color-mix(in srgb, var(--tone) 12%, #1a1423);
+}
+
+.ai-monogram {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--tone) 20%, #15101d);
+  color: var(--tone);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.ai-option-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ai-option-info strong {
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ai-option-info small {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #a197b2;
+  font-size: 11px;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.ai-check {
+  flex: none;
+  margin-left: auto;
+  color: var(--tone);
+}
+
+.ai-empty {
+  margin: 24px 0;
+  color: #a197b2;
+  font-size: 13px;
+  text-align: center;
+}
+
+.ai-empty button {
+  border: 0;
+  background: none;
+  color: #c9b8ff;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.ai-footnote {
+  margin: 10px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid #2a2236;
+  color: #85799a;
+  font-size: 10.5px;
+}
+
+/* tablet */
+@media (max-width: 1180px) {
+  .ai-panel {
+    width: min(600px, calc(100vw - 32px));
+  }
+}
+
+/* celular: botão compacto + catálogo como gaveta que sobe do rodapé */
+@media (max-width: 660px) {
+  .mk-header-actions .ai-picker > .ai-trigger {
+    max-width: 140px;
+    height: 34px;
+    padding: 0 9px 0 4px;
+    gap: 6px;
+    font-size: 11px;
+  }
+
+  .ai-trigger-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* regra antiga esconde svg do botão do modelo no celular; o ícone da categoria deve aparecer */
+  .mk-header-actions .ai-picker .ai-trigger-icon svg {
+    display: block;
+  }
+
+  .mk-header-actions .ai-picker .ai-trigger-chevron {
+    display: none;
+  }
+
+  .ai-sheet-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 118;
+    padding: 0;
+    border: 0;
+    background: rgba(5, 3, 10, 0.62);
+    animation: ai-fade 0.2s ease both;
+  }
+
+  .ai-panel {
+    position: fixed;
+    top: auto !important;
+    right: 0 !important;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: 86dvh !important;
+    padding: 8px 14px calc(12px + env(safe-area-inset-bottom, 0px));
+    border-width: 1px 0 0;
+    border-radius: 22px 22px 0 0;
+    animation: ai-sheet-in 0.24s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .ai-sheet-grip {
+    display: block;
+    width: 40px;
+    height: 4px;
+    margin: 2px auto 12px;
+    border-radius: 4px;
+    background: #4a3d5c;
+  }
+
+  .ai-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-option-info small {
+    -webkit-line-clamp: 1;
+  }
+}
+
+@keyframes ai-sheet-in {
+  from { transform: translateY(100%); }
+  to { transform: none; }
+}
+
+@keyframes ai-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-panel,
+  .ai-sheet-backdrop {
+    animation: none;
+  }
+}
+/* =====================================================================
+   Sidebar proporcional: topo e conta fixos, lista do meio com rolagem
+   ===================================================================== */
+.mk-shell > .mk-sidebar {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  padding-top: 22px;
+}
+
+.mk-sidebar-top {
+  flex: none;
+}
+
+.mk-brand-logo.mk-brand-home {
+  gap: 4px;
+  padding: 2px 6px 0;
+  margin-bottom: 18px;
+}
+
+.mk-brand-home .brand-logo__image {
+  width: 26px !important;
+  height: 26px !important;
+}
+
+.mk-brand-home .brand-logo {
+  gap: 10px;
+  font-size: 14px;
+}
+
+.mk-brand-home small {
+  padding-left: 36px;
+  font-size: 8.5px;
+}
+
+.mk-side-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 0 -6px;
+  padding: 0 6px 12px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #3a3047 transparent;
+  -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 18px), transparent);
+  mask-image: linear-gradient(180deg, #000 calc(100% - 18px), transparent);
+}
+
+.mk-side-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mk-side-scroll::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: #3a3047;
+}
+
+.mk-side-scroll > .mk-side-group:first-child {
+  margin-top: 18px;
+}
+
+.mk-shell .mk-sidebar-bottom {
+  flex: none;
+  margin-top: 0;
+  padding-top: 10px;
+}
+
+.mk-shell .mk-side-tools {
+  padding-bottom: 10px;
+}
+
+.mk-shell .mk-account-button {
+  padding: 12px 6px calc(14px + env(safe-area-inset-bottom, 0px));
+}
+
+.mk-account-details small {
+  max-width: none;
+}
+
+/* telas baixas: compacta ainda mais o topo */
+@media (max-height: 720px) {
+  .mk-shell > .mk-sidebar {
+    padding-top: 14px;
+  }
+
+  .mk-brand-logo.mk-brand-home {
+    margin-bottom: 12px;
+  }
+
+  .mk-brand-home small {
+    display: none;
+  }
+
+  .mk-shell .mk-side-tools button {
+    min-height: 38px;
   }
 }
