@@ -59,9 +59,6 @@ export default function Blog() {
         const term = search.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
         return categoryMatches && text.includes(term);
     }), [category, search]);
-    const featured = category === "Todos" && !search.trim() ? visiblePosts[0] : null;
-    const gridPosts = featured ? visiblePosts.slice(1) : visiblePosts;
-    const displayedPosts = showAll ? gridPosts : gridPosts.slice(0, 4);
 
     function selectCategory(cat) {
         setCategory(cat);
@@ -108,7 +105,7 @@ export default function Blog() {
                     </button>
                     <div className="blog-editor-picks rv" style={{ "--d": ".12s" }}>
                         <div className="blog-picks-heading"><span className="cap ac">LEITURA RECOMENDADA</span><span>02 — 03</span></div>
-                        {posts.slice(1, 3).map((post, i) => <button className="blog-pick" type="button" key={post.id} onClick={() => setSelectedPost(post)}><div className="blog-pick-art"><Artwork kind={post.art} /></div><div><span className="blog-pick-meta">{post.category} / {post.minutes} MIN</span><h3>{post.title}</h3><span className="blog-pick-link">Ler agora ↗</span></div></button>)}
+                        {posts.slice(1, 3).map((post) => <button className="blog-pick" type="button" key={post.id} onClick={() => setSelectedPost(post)}><div className="blog-pick-art"><Artwork kind={post.art} /></div><div><span className="blog-pick-meta">{post.category} / {post.minutes} MIN</span><h3>{post.title}</h3><span className="blog-pick-link">Ler agora ↗</span></div></button>)}
                         <div className="blog-picks-foot"><span>MAKIIA EDITORIAL</span><span>CRIAÇÃO EM MOVIMENTO</span></div>
                     </div>
                 </div>

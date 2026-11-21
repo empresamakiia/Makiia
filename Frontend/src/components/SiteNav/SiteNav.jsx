@@ -1,7 +1,7 @@
 import Logo from "../Logo/Logo.jsx";
 
 /* Navbar única do site: as mesmas páginas em todas as telas. */
-export const SITE_LINKS = [
+const SITE_LINKS = [
     ["/", "Início"],
     ["/sobre", "Sobre"],
     ["/blog", "Blog"],
