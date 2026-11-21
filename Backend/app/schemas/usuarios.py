@@ -1,6 +1,8 @@
 from datetime import datetime
 
-from pydantic import BaseModel, ConfigDict, EmailStr, Field
+from typing import Annotated
+
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, StringConstraints
 
 
 class UsuarioCreate(BaseModel):
@@ -58,4 +60,11 @@ class SolicitarRecuperacaoIn(BaseModel):
 class RedefinirSenhaIn(BaseModel):
     """Corpo da redefinição: o token recebido + a nova senha."""
     token: str
-    senha_nova: str    
+    senha_nova: str
+
+
+class CadastroIn(BaseModel):
+    """Dados do cadastro público (tela "Criar conta"): o perfil é definido pelo servidor."""
+    nome: Annotated[str, StringConstraints(strip_whitespace=True, min_length=2, max_length=100)]
+    email: EmailStr
+    senha: str = Field(min_length=8, max_length=72)  # 72: limite do bcrypt

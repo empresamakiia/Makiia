@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AuthPanel from "../../components/AuthPanel/AuthPanel";
+import { fetchCurrentUser, register } from "../../services/auth";
 import "./Register.css";
 
 const STRENGTH_LABELS = ["Muito fraca", "Fraca", "Média", "Boa", "Forte"];
+
+// Mesmas regras do backend (POST /auth/cadastro)
+const MIN_PASSWORD = 8;
+const MAX_PASSWORD = 72;
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function getStrength(password) {
   if (!password) return 0;
@@ -26,8 +32,30 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const strength = getStrength(password);
+
+  // Quem já tem uma sessão válida vai direto para o chat.
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchCurrentUser({ signal: controller.signal })
+      .then((user) => {
+        if (user) navigate("/chat", { replace: true });
+      })
+      .catch(() => {
+        /* backend fora do ar: segue no cadastro normalmente */
+      });
+    return () => controller.abort();
+  }, [navigate]);
+
+  // Ao corrigir um campo, o aviso anterior deixa de valer.
+  function updateField(setter) {
+    return (event) => {
+      setter(event.target.type === "checkbox" ? event.target.checked : event.target.value);
+      if (error) setError("");
+    };
+  }
 
   function transitionToLogin() {
     if (isLeaving) return;
@@ -41,17 +69,33 @@ function Register() {
     );
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    if (isSubmitting) return;
     setError("");
 
-    if (!name.trim() || !email.trim() || !password.trim()) {
+    if (!name.trim() || !email.trim() || !password) {
       setError("Preencha nome, e-mail e senha para continuar.");
       return;
     }
 
-    if (password.length < 6) {
-      setError("A senha precisa ter pelo menos 6 caracteres.");
+    if (name.trim().length < 2) {
+      setError("O nome precisa ter pelo menos 2 caracteres.");
+      return;
+    }
+
+    if (!EMAIL_PATTERN.test(email.trim())) {
+      setError("Informe um e-mail válido.");
+      return;
+    }
+
+    if (password.length < MIN_PASSWORD) {
+      setError(`A senha precisa ter pelo menos ${MIN_PASSWORD} caracteres.`);
+      return;
+    }
+
+    if (password.length > MAX_PASSWORD) {
+      setError(`A senha pode ter no máximo ${MAX_PASSWORD} caracteres.`);
       return;
     }
 
@@ -65,10 +109,14 @@ function Register() {
       return;
     }
 
-    // TODO: conectar ao backend (cadastro)
-    window.alert(
-      "O formulário está pronto! Agora você pode conectar o cadastro ao backend.",
-    );
+    setIsSubmitting(true);
+    try {
+      await register(name, email, password);
+      navigate("/chat");
+    } catch (apiError) {
+      setError(apiError.message);
+      setIsSubmitting(false);
+    }
   }
 
   function handleSocialSignup(provider) {
@@ -193,8 +241,9 @@ function Register() {
                     type="text"
                     placeholder="Seu nome"
                     value={name}
-                    onChange={(event) => setName(event.target.value)}
+                    onChange={updateField(setName)}
                     autoComplete="name"
+                    maxLength={100}
                     required
                   />
                 </div>
@@ -209,7 +258,7 @@ function Register() {
                     type="email"
                     placeholder="seuemail@gmail.com"
                     value={email}
-                    onChange={(event) => setEmail(event.target.value)}
+                    onChange={updateField(setEmail)}
                     autoComplete="email"
                     required
                   />
@@ -225,9 +274,10 @@ function Register() {
                     type={showPassword ? "text" : "password"}
                     placeholder="Crie uma senha"
                     value={password}
-                    onChange={(event) => setPassword(event.target.value)}
+                    onChange={updateField(setPassword)}
                     autoComplete="new-password"
-                    minLength={6}
+                    minLength={MIN_PASSWORD}
+                    maxLength={MAX_PASSWORD}
                     required
                   />
 
@@ -267,7 +317,7 @@ function Register() {
                     type={showPassword ? "text" : "password"}
                     placeholder="Repita a senha"
                     value={confirm}
-                    onChange={(event) => setConfirm(event.target.value)}
+                    onChange={updateField(setConfirm)}
                     autoComplete="new-password"
                     required
                   />
@@ -281,7 +331,7 @@ function Register() {
                 <input
                   type="checkbox"
                   checked={acceptTerms}
-                  onChange={(event) => setAcceptTerms(event.target.checked)}
+                  onChange={updateField(setAcceptTerms)}
                 />
                 <span>
                   Li e aceito os <a href="#termos">Termos</a> e a{" "}
@@ -299,8 +349,10 @@ function Register() {
                 className="submit-button stagger"
                 style={{ "--i": 8 }}
                 type="submit"
+                disabled={isSubmitting}
+                aria-busy={isSubmitting}
               >
-                Criar minha conta
+                {isSubmitting ? "Criando conta…" : "Criar minha conta"}
               </button>
             </form>
 

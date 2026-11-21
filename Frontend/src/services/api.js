@@ -31,6 +31,7 @@ function messageFromBody(body, status) {
   if (Array.isArray(detail) && detail.length) {
     const field = detail[0]?.loc?.[detail[0].loc.length - 1];
     if (field === "email") return "Informe um e-mail válido.";
+    if (field === "nome") return "Informe seu nome (de 2 a 100 caracteres).";
     if (field === "senha" || field === "senha_nova") return "Confira a senha informada.";
   }
   return DEFAULT_MESSAGES[status] || DEFAULT_MESSAGES[status >= 500 ? 500 : 422];
