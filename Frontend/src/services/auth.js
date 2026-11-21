@@ -1,5 +1,6 @@
 /*
  * Autenticação da MAKIIA, ligada às rotas /auth do backend:
+ *   POST /auth/cadastro         -> cria a conta (perfil padrão) e devolve { access_token, token_type, usuario }
  *   POST /auth/login            -> { access_token, token_type, usuario }
  *   GET  /auth/me               -> dados do usuário dono do token
  *   POST /auth/recuperar-senha  -> envia o token de recuperação (em dev, aparece no console do backend)
@@ -8,6 +9,9 @@
 import { apiRequest, ApiError } from "./api";
 
 const SESSION_KEY = "makiia.session";
+
+// O backend grava o e-mail em minúsculas no cadastro; o mesmo formato é usado em todas as chamadas.
+const normalizeEmail = (email) => email.trim().toLowerCase();
 
 function readStorage(storage) {
   try {
@@ -46,11 +50,21 @@ export function clearSession() {
   }
 }
 
+/** Cria a conta e já deixa o usuário conectado. Devolve o usuário criado. */
+export async function register(nome, email, senha, { remember = false } = {}) {
+  const data = await apiRequest("/auth/cadastro", {
+    method: "POST",
+    body: { nome: nome.trim(), email: normalizeEmail(email), senha },
+  });
+  saveSession({ token: data.access_token, usuario: data.usuario }, remember);
+  return data.usuario;
+}
+
 /** Entra com e-mail e senha. Devolve o usuário autenticado. */
 export async function login(email, senha, { remember = false } = {}) {
   const data = await apiRequest("/auth/login", {
     method: "POST",
-    body: { email: email.trim(), senha },
+    body: { email: normalizeEmail(email), senha },
   });
   saveSession({ token: data.access_token, usuario: data.usuario }, remember);
   return data.usuario;
@@ -84,7 +98,7 @@ export async function fetchCurrentUser({ signal } = {}) {
 export function requestPasswordReset(email) {
   return apiRequest("/auth/recuperar-senha", {
     method: "POST",
-    body: { email: email.trim() },
+    body: { email: normalizeEmail(email) },
   });
 }
 
