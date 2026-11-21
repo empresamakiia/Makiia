@@ -479,12 +479,21 @@ export default function initLanding() {
   const setMenu = (open) => {
     lk.classList.toggle("open", open);
     burger.setAttribute("aria-expanded", open);
-    document.body.style.overflow = open ? "hidden" : "";
+    burger.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
   };
 
   on(burger, "click", () => setMenu(!lk.classList.contains("open")));
 
   $$("#lk a").forEach((a) => on(a, "click", () => setMenu(false)));
+
+  // Fecha o menu ao tocar/clicar fora da navbar ou ao voltar para o desktop.
+  on(document, "pointerdown", (e) => {
+    if (lk.classList.contains("open") && !nav.contains(e.target)) setMenu(false);
+  });
+
+  on(window, "resize", () => {
+    if (innerWidth > 980 && lk.classList.contains("open")) setMenu(false);
+  });
 
   on(window, "keydown", (e) => {
     if (e.key === "Escape") setMenu(false);

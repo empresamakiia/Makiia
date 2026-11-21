@@ -931,3 +931,114 @@
 .cta.cta-x .row {
   margin-top: 4px;
 }
+
+/* =====================================================================
+   Navbar responsiva (≤ 980px): menu em painel suspenso abaixo da barra.
+   Antes o menu era "fixed" dentro da barra de vidro (backdrop-filter +
+   overflow hidden), o que o prendia e cortava dentro da própria barra.
+   ===================================================================== */
+@media (max-width: 980px) {
+  #nav .nv {
+    overflow: visible;
+  }
+
+  /* brilho de vidro passaria para fora da barra sem o overflow hidden */
+  #nav .nv::after {
+    display: none;
+  }
+
+  #nav .lk {
+    position: absolute;
+    inset: auto;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 2px;
+    max-height: calc(100dvh - 110px);
+    padding: 10px;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 22px;
+    background: #0c0a14;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+    font-size: 15px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s var(--ease), visibility 0.25s;
+  }
+
+  #nav .lk.open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  #nav .lk > a {
+    padding: 13px 14px;
+    border-radius: 14px;
+    color: var(--mut);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  #nav .lk > a::after {
+    display: none;
+  }
+
+  #nav .lk > a:hover,
+  #nav .lk > a:focus-visible {
+    background: var(--surf2);
+    color: var(--tx);
+  }
+
+  #nav .lk > a.act {
+    background: rgba(123, 77, 255, 0.14);
+    color: var(--tx);
+    box-shadow: inset 3px 0 0 #7b4dff;
+  }
+
+  #nav .lk-m {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+
+  #nav .lk-m .btn {
+    flex: 1;
+    justify-content: center;
+    padding: 12px 14px;
+    font-size: 14px;
+    white-space: nowrap;
+    color: var(--tx);
+  }
+}
+
+/* entre 601px e 980px o "Começar grátis" já aparece na barra */
+@media (min-width: 601px) and (max-width: 980px) {
+  #nav .lk-m .btn.pri {
+    display: none;
+  }
+}
+
+/* telas bem estreitas: botões do menu empilhados */
+@media (max-width: 420px) {
+  #nav .lk-m {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #nav .lk {
+    transition: none;
+  }
+}
