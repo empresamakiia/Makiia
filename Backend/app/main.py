@@ -47,6 +47,7 @@ app = FastAPI(
 origens_permitidas = [
     "http://localhost:3000",   # Next.js (porta padrão)
     "http://localhost:5173",   # Vite (porta padrão)
+    "http://localhost:5174",   # Vite (porta alternativa, quando a 5173 já está em uso)
 ]
 
 app.add_middleware(
