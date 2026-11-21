@@ -10,12 +10,15 @@ import Chat from "./pages/Chat/Chat";
 // Páginas adicionadas pela equipe
 import Cookies from "./pages/Cookies/Cookies";
 import TermosDeUso from "./pages/TermodeUso/TermosdeUso";
+import Privacidade from "./pages/Privacidade/Privacidade";
 import CookieBanner from "./components/CookieBanner/CookieBanner";
 import CookieConsentProvider from "./consent/CookieConsentProvider";
 
 // Seção Empresa
 import Sobre from "./pages/Sobre/Sobre";
 import Blog from "./pages/Blog/Blog";
+import Contato from "./pages/Contato/Contato";
+import Ajuda from "./pages/Ajuda/Ajuda";
 
 function App() {
   useEffect(() => {
@@ -44,8 +47,11 @@ function App() {
           <Route path="/chat" element={<Chat />} />
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/termos" element={<TermosDeUso />} />
+          <Route path="/privacidade" element={<Privacidade />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/contato" element={<Contato />} />
+          <Route path="/ajuda" element={<Ajuda />} />
         </Routes>
 
         <CookieBanner />
