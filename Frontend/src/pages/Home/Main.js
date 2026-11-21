@@ -168,9 +168,9 @@ export default function initLanding() {
   };
 
   const finish = () => {
-    rs.textContent = "Esculpiu por 9 segundos";
+    rs.textContent = "Esculpiu por 3 segundos";
     rs.classList.add("done");
-    later(revealArtwork, 650);
+    later(revealArtwork, 300);
   };
 
   // Demo de digitação: só existe na landing (outras páginas reutilizam o init).
@@ -188,7 +188,7 @@ export default function initLanding() {
     typed.textContent = typed.dataset.text;
     caret.classList.add("off");
     seq(1);
-    rs.textContent = "Esculpiu por 9 segundos";
+    rs.textContent = "Esculpiu por 3 segundos";
     rs.classList.add("done");
     revealArtwork();
   } else {
@@ -198,15 +198,15 @@ export default function initLanding() {
     const tick = () => {
       typed.textContent = text.slice(0, ++i);
 
-      if (i < text.length) return later(tick, 26);
+      if (i < text.length) return later(tick, 12);
 
       caret.classList.add("off");
 
-      later(() => seq(1), 350);
-      later(finish, 2200);
+      later(() => seq(1), 200);
+      later(finish, 1000);
     };
 
-    later(tick, 900);
+    later(tick, 300);
   }
   }
 
@@ -401,7 +401,8 @@ export default function initLanding() {
   on(window, "resize", req);
   update();
 
-  const links = $$(".lk > a");
+  // Só links de âncora (#secao) recebem destaque por rolagem; links de página mantêm o "act" da página atual.
+  const links = $$(".lk > a").filter((a) => (a.getAttribute("href") || "").startsWith("#"));
 
   const sio = observe(
     (es) =>
@@ -478,12 +479,21 @@ export default function initLanding() {
   const setMenu = (open) => {
     lk.classList.toggle("open", open);
     burger.setAttribute("aria-expanded", open);
-    document.body.style.overflow = open ? "hidden" : "";
+    burger.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
   };
 
   on(burger, "click", () => setMenu(!lk.classList.contains("open")));
 
   $$("#lk a").forEach((a) => on(a, "click", () => setMenu(false)));
+
+  // Fecha o menu ao tocar/clicar fora da navbar ou ao voltar para o desktop.
+  on(document, "pointerdown", (e) => {
+    if (lk.classList.contains("open") && !nav.contains(e.target)) setMenu(false);
+  });
+
+  on(window, "resize", () => {
+    if (innerWidth > 980 && lk.classList.contains("open")) setMenu(false);
+  });
 
   on(window, "keydown", (e) => {
     if (e.key === "Escape") setMenu(false);

@@ -1,8 +1,16 @@
 import { useEffect } from "react";
 import initLanding from "./Main.js";
 import Logo from "../../components/Logo/Logo.jsx";
+import SiteNav from "../../components/SiteNav/SiteNav.jsx";
+import SiteFooter from "../../components/SiteFooter/SiteFooter.jsx";
+import CampaignCta from "../../components/CampaignCta/CampaignCta.jsx";
 import "./Home.css";
 import "./Home-poster.css";
+import "./HomeArt.css";
+import {
+  BeanMark, SealMark, CupMark, PosterStamp, LogoShowcase, IdentityBoard,
+  StepBriefing, StepConcept, StepIdentity, StepPieces, PraticaArt,
+} from "./HomeArt.jsx";
 import brasaPosterBg from "../../assets/brasa-poster-bg.png";
 
 
@@ -33,47 +41,7 @@ export default function Home() {
         </defs>
       </svg>
 
-      <nav id="nav">
-        <div className="w">
-          <div className="nv">
-            <a className="logo" href="#top" aria-label="MAKIIA, início">
-              <Logo size={28} />
-            </a>
-            <div className="lk" id="lk">
-              <a href="#recursos">Recursos</a>
-              <a href="#como">Como funciona</a>
-              <a href="#pratica">Na prática</a>
-              <a href="#planos">Planos</a>
-              <a href="#faq">Dúvidas</a>
-              <div className="lk-m">
-                <a className="btn" href="/login">
-                  Entrar
-                </a>
-                <a className="btn pri" href="/login#cadastro">
-                  Começar grátis
-                </a>
-              </div>
-            </div>
-            <div className="ac">
-              <a className="btn sm" href="/login">
-                Entrar
-              </a>
-              <a className="btn sm pri mag" href="/login#cadastro">
-                Começar grátis
-              </a>
-              <button
-                className="burger"
-                id="burger"
-                aria-label="Abrir menu"
-                aria-expanded="false"
-              >
-                <span></span>
-                <span></span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <SiteNav active="/" />
 
       <main id="top">
         <header className="w hero">
@@ -86,7 +54,7 @@ export default function Home() {
           </h1>
           <p className="rv" style={{ "--d": ".35s" }}>
             Gere logos, cartazes e identidade visual conversando. A MAKIIA
-            entende o seu briefing e mantém cada peça coerente com a marca.
+            entende o seu briefing e mantém cada peça coerente com a campanha.
           </p>
           <div className="row rv" style={{ "--d": ".45s" }}>
             <a className="btn pri mag" href="/login#cadastro">
@@ -128,10 +96,7 @@ export default function Home() {
                     </div>
                     <div className="ai seq" data-step="1">
                       <span className="coffee-assistant-mark" aria-hidden="true">
-                        <svg viewBox="0 0 32 32">
-                          <path d="M16 4c6.4 0 11 5 11 11.4S22.5 28 16 28 5 22.8 5 16.2 9.6 4 16 4Z" fill="url(#lg)" />
-                          <path d="M11 22c4-2.2 7-6 10-12" fill="none" stroke="#21120d" strokeWidth="2" strokeLinecap="round" />
-                        </svg>
+                        <Logo size={16} showName={false} />
                       </span>
                       <div>
                         <span className="rs" id="rs">
@@ -142,34 +107,15 @@ export default function Home() {
                         </div>
                         <div className="chips" aria-label="Três conceitos de símbolo para a cafeteria">
                           <button className="chip-option is-selected" type="button" aria-label="Conceito Grão">
-                            <span className="chip-mark">
-                              <svg viewBox="0 0 40 40" aria-hidden="true">
-                                <path d="M20 5c8 0 14 6 14 14S27 35 19 35 6 29 6 21 12 5 20 5Z" fill="url(#lg)" />
-                                <path d="M13 28c5-3 9-8 14-16" fill="none" stroke="#171019" strokeWidth="2.5" strokeLinecap="round" />
-                              </svg>
-                            </span>
+                            <span className="chip-mark"><BeanMark size={46} /></span>
                             <span className="chip-name">Grão</span>
                           </button>
-
                           <button className="chip-option" type="button" aria-label="Conceito Selo">
-                            <span className="chip-mark">
-                              <svg viewBox="0 0 40 40" aria-hidden="true">
-                                <path d="M20 4 24 9 31 8 32 15 37 20 32 25 31 32 24 31 20 36 16 31 9 32 8 25 3 20 8 15 9 8 16 9Z" fill="url(#lg)" />
-                                <circle cx="20" cy="20" r="6" fill="#171019" />
-                                <path d="M20 15v10M15 20h10" stroke="#f4d8b0" strokeWidth="1.5" />
-                              </svg>
-                            </span>
+                            <span className="chip-mark"><SealMark size={46} /></span>
                             <span className="chip-name">Selo</span>
                           </button>
-
                           <button className="chip-option" type="button" aria-label="Conceito Xícara">
-                            <span className="chip-mark">
-                              <svg viewBox="0 0 40 40" aria-hidden="true">
-                                <path d="M8 17h20v8a8 8 0 0 1-8 8h-4a8 8 0 0 1-8-8v-8Z" fill="url(#lg)" />
-                                <path d="M28 19h2a4 4 0 0 1 0 8h-3" fill="none" stroke="#f4d8b0" strokeWidth="2" />
-                                <path d="M14 13c-2-2 2-3 0-5m7 5c-2-2 2-3 0-5" fill="none" stroke="#f4d8b0" strokeWidth="1.8" strokeLinecap="round" />
-                              </svg>
-                            </span>
+                            <span className="chip-mark"><CupMark size={46} /></span>
                             <span className="chip-name">Xícara</span>
                           </button>
                         </div>
@@ -193,9 +139,10 @@ export default function Home() {
                         <div className="poster-shade" aria-hidden="true"></div>
 
                         <div className="poster-top">
-                          <strong>Grão &amp; Prosa</strong>
+                          <span className="poster-brand"><BeanMark size={18} /><strong>Grão &amp; Prosa</strong></span>
                           <span>CAFETERIA</span>
                         </div>
+                        <PosterStamp />
 
                         <div className="poster-copy">
                           <span className="poster-kicker">
@@ -211,7 +158,7 @@ export default function Home() {
 
                         <div className="poster-bottom">
                           <span>ESPRESSO · COADOS</span>
-                          <span>DOCES DA CASA</span>
+                          <span>ABERTO 7H–19H</span>
                         </div>
                       </div>
                       <div className="artwork-footer">
@@ -258,7 +205,7 @@ export default function Home() {
               <b className="gt" data-count="100" data-suffix="%">
                 100%
               </b>
-              <span>COERÊNCIA DE MARCA</span>
+              <span>COERÊNCIA DE CAMPANHA</span>
             </div>
             <div className="rv" style={{ "--d": ".24s" }}>
               <b className="gt" data-count="3">
@@ -298,15 +245,7 @@ export default function Home() {
                     Explore vários conceitos de logotipo a partir de uma simples
                     descrição.
                   </p>
-                  <div className="vis">
-                    <span className="vis-caption">
-                      EXPLORAÇÃO DE FORMAS / 001
-                    </span>
-                    <i className="v1"></i>
-                    <i className="v2"></i>
-                    <i className="v3"></i>
-                    <i className="v4"></i>
-                  </div>
+                  <LogoShowcase />
                 </div>
               </div>
               <div className="cell s2 rv" style={{ "--d": ".1s" }}>
@@ -326,9 +265,10 @@ export default function Home() {
                     Paleta, tipografia e regras de uso nascem juntas e combinam
                     entre si.
                   </p>
+                  <IdentityBoard />
                 </div>
               </div>
-              <div className="cell s2 rv">
+              <div className="cell s3 rv">
                 <div className="cd tilt">
                   <div
                     className="ic"
@@ -348,7 +288,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="cell s2 rv" style={{ "--d": ".1s" }}>
+              <div className="cell s3 rv" style={{ "--d": ".1s" }}>
                 <div className="cd tilt">
                   <div
                     className="ic"
@@ -367,7 +307,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="cell s2 rv" style={{ "--d": ".2s" }}>
+              <div className="cell s2 rv">
                 <div className="cd tilt">
                   <div
                     className="ic"
@@ -387,7 +327,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="cell s4 rv">
+              <div className="cell s4 rv" style={{ "--d": ".1s" }}>
                 <div className="cd tilt">
                   <div
                     className="ic"
@@ -423,7 +363,7 @@ export default function Home() {
             <div className="how-l">
               <span className="cap ac">Como funciona</span>
               <h2 style={{ marginTop: "14px" }}>
-                Do briefing à marca, tudo se <span className="gt">encaixa</span>
+                Do briefing à campanha, tudo se <span className="gt">encaixa</span>
               </h2>
               <p className="mut" style={{ marginTop: "16px" }}>
                 Role para acompanhar cada etapa do processo.
@@ -437,42 +377,25 @@ export default function Home() {
                 <div className="num">01</div>
                 <h3>Briefing</h3>
                 <p>Conte sobre o negócio, o público e o tom desejado.</p>
-                <div className="mini">
-                  <span></span>
-                  <span></span>
-                  <span className="s"></span>
-                </div>
+                <StepBriefing />
               </article>
               <article className="step">
                 <div className="num">02</div>
                 <h3>Conceito</h3>
                 <p>A IA propõe rotas criativas e referências visuais.</p>
-                <div className="mini row2">
-                  <b>Rota A</b>
-                  <b>Rota B</b>
-                  <b>Rota C</b>
-                </div>
+                <StepConcept />
               </article>
               <article className="step">
                 <div className="num">03</div>
                 <h3>Identidade</h3>
                 <p>Logo, cores e tipografia nascem juntos e coerentes.</p>
-                <div className="mini row2">
-                  <i style={{ background: "#5B3CF5" }}></i>
-                  <i style={{ background: "#C73A68" }}></i>
-                  <i style={{ background: "#FF8A4C" }}></i>
-                  <i style={{ background: "#FFBE55" }}></i>
-                  <em>Aa</em>
-                </div>
+                <StepIdentity />
               </article>
               <article className="step">
                 <div className="num">04</div>
                 <h3>Peças</h3>
-                <p>Cartazes e posts prontos, com a marca já aplicada.</p>
-                <div className="mini pst">
-                  <Logo size={26} showName={false} />
-                  <b>Grão &amp; Prosa</b>
-                </div>
+                <p>Cartazes e posts prontos, com a campanha já aplicada.</p>
+                <StepPieces />
               </article>
             </div>
           </div>
@@ -507,69 +430,7 @@ export default function Home() {
                     </a>
                   </div>
                 </div>
-                <div
-                  className="brand-lab"
-                  aria-label="Demonstração de identidade visual aplicada em diferentes peças"
-                >
-                  <div className="brand-lab-top">
-                    <span>
-                      <i className="brand-live"></i> LIVE BRAND STUDIO
-                    </span>
-                    <span>01 / 03</span>
-                  </div>
-                  <div className="brand-canvas" data-motion-surface>
-                    <div className="motion-reticle" aria-hidden="true">
-                      <span>+</span>
-                      <span>CREATIVE SYSTEM / 001</span>
-                    </div>
-                    <div
-                      className="motion-line motion-line-a"
-                      aria-hidden="true"
-                    ></div>
-                    <div
-                      className="motion-line motion-line-b"
-                      aria-hidden="true"
-                    ></div>
-                    <div className="brand-orbit brand-orbit-a"></div>
-                    <div className="brand-orbit brand-orbit-b"></div>
-                    <div className="brand-glow"></div>
-                    <div className="brand-glyph" aria-hidden="true">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </div>
-                    <div className="brand-main-copy">
-                      <small>CONCEITO / IDENTIDADE</small>
-                      <strong>
-                        Além do
-                        <br />
-                        <em>óbvio.</em>
-                      </strong>
-                    </div>
-                    <span className="brand-coordinate">
-                      BRAND SYSTEM — 2026
-                    </span>
-                  </div>
-                  <div className="brand-lab-bottom">
-                    <div className="brand-thumbnail thumb-symbol">
-                      <span className="thumb-mark">◎</span>
-                      <small>SÍMBOLO</small>
-                    </div>
-                    <div className="brand-thumbnail thumb-type">
-                      <strong>Aa</strong>
-                      <small>TIPOGRAFIA</small>
-                    </div>
-                    <div className="brand-thumbnail thumb-layout">
-                      <i></i>
-                      <b>OR/YN</b>
-                      <small>APLICAÇÃO</small>
-                    </div>
-                  </div>
-                  <div className="brand-lab-caption">
-                    <span>Uma ideia. Diversas expressões.</span>
-                    <span>DESIGN EM MOVIMENTO</span>
-                  </div>
-                </div>
+                <PraticaArt />
               </div>
             </div>
             <div style={{ marginTop: "80px" }}>
@@ -589,7 +450,7 @@ export default function Home() {
           <div className="w">
             <div className="head c rv">
               <span className="cap ac">Planos</span>
-              <h2>Comece grátis, cresça com a sua marca</h2>
+              <h2>Comece grátis, cresça com a sua campanha</h2>
               <div
                 className="bill"
                 role="group"
@@ -625,7 +486,7 @@ export default function Home() {
                     49
                   </span>
                 </b>
-                <p>Para quem vive de marca · por mês</p>
+                <p>Para quem vive de campanha · por mês</p>
                 <ul>
                   <li>Projetos ilimitados</li>
                   <li>PNG, SVG e PDF</li>
@@ -717,73 +578,10 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="cta" style={{ padding: "20px 0 0" }}>
-          <div className="w">
-            <div className="grow" data-grow="0.92">
-              <div className="cta">
-                <h2 style={{ marginTop: "14px" }}>
-                  Pronto para criar sua próxima{" "}
-                  <span className="gt">campanha</span>?
-                </h2>
-                <p>
-                  Comece com um briefing e veja as primeiras ideias em minutos.
-                </p>
-                <div className="row">
-                  <a className="btn pri mag" href="/login#cadastro">
-                    Criar meu projeto
-                  </a>
-                  <a className="btn mag" href="/login">
-                    Entrar
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <CampaignCta />
       </main>
 
-      <footer>
-        <div className="w">
-          <div className="fg">
-            <div>
-              <a className="logo" href="#top">
-                <Logo size={28} />
-              </a>
-              <p>
-                IA criativa para quem constrói marcas: logos, identidade visual
-                e peças em uma só conversa.
-              </p>
-            </div>
-            <div>
-              <h4>Produto</h4>
-              <a href="#recursos">Recursos</a>
-              <a href="#como">Como funciona</a>
-              <a href="#planos">Planos</a>
-              <a href="#faq">Dúvidas</a>
-            </div>
-            <div>
-              <h4>Empresa</h4>
-              <a href="/sobre">Sobre</a>
-              <a href="/blog">Blog</a>
-              <a href="#">Contato</a>
-              <a href="#">Ajuda</a>
-            </div>
-            <div>
-              <h4>Legal</h4>
-              <a href="/termos">Termos de uso</a>
-              <a href="#">Privacidade</a>
-              <a href="/cookies">Cookies</a>
-            </div>
-          </div>
-          <div className="big" aria-hidden="true">
-            MAKIIA
-          </div>
-          <div className="fb">
-            <span>© 2026 MAKIIA</span>
-            <a href="#top">Voltar ao topo</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter active="/" />
     </>
   );
 }

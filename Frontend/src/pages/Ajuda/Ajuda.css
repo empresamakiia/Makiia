@@ -1,0 +1,710 @@
+/* Estilos exclusivos da página Ajuda — Home.css preserva navbar, fundo, cursor e footer. */
+.ajuda-page {
+    position: relative;
+    min-height: 100vh;
+    color: var(--tx);
+}
+
+.ajuda-page .ajuda-main {
+    position: relative;
+    z-index: 1;
+}
+
+.ajuda-page .ajuda-hero {
+    padding-top: 106px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ajuda-page .ajuda-hero h1 {
+    max-width: 900px;
+}
+
+.ajuda-page .ajuda-hero>p {
+    max-width: 620px;
+    margin: 14px auto 0;
+}
+
+.ajuda-page .ajuda-search {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: min(560px, 100%);
+    height: 56px;
+    margin-top: 30px;
+    padding: 0 12px 0 23px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surf);
+    color: var(--mut);
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.ajuda-page .ajuda-search:focus-within {
+    border-color: rgba(123, 77, 255, .7);
+    box-shadow: 0 0 0 4px rgba(123, 77, 255, .15)
+}
+
+.ajuda-page .ajuda-search input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.ajuda-page .ajuda-search input::placeholder {
+    color: var(--mut)
+}
+
+.ajuda-page .ajuda-search kbd {
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surf);
+    color: var(--mut);
+    font: 400 12px Sora, sans-serif
+}
+
+.ajuda-page .ajuda-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.ajuda-page .ajuda-chip {
+    min-height: 41px;
+    padding: 0 20px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surf);
+    color: #d8d6e2;
+    font-size: 13px;
+    transition: background .2s, transform .2s
+}
+
+.ajuda-page .ajuda-chip:hover {
+    background: var(--surf2);
+    transform: translateY(-2px)
+}
+
+.ajuda-page .ajuda-chip.selected {
+    border-color: rgba(255, 255, 255, .14);
+    background: linear-gradient(90deg, rgba(123, 77, 255, 0.78), rgba(205, 94, 150, 0.72));
+    box-shadow: inset 0 1px rgba(255, 255, 255, .12);
+    color: #fff;
+    font-weight: 600
+}
+
+.ajuda-page .ajuda-topics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    padding: 0;
+    margin-top: 72px;
+}
+
+.ajuda-page .ajuda-topic {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    min-height: 230px;
+    color: inherit;
+    font: inherit;
+}
+
+.ajuda-page .ajuda-icon {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #7B4DFF, #C73A68)
+}
+
+.ajuda-page .ajuda-icon.warm {
+    background: linear-gradient(135deg, #C73A68, #FF8A4C)
+}
+
+.ajuda-page .ajuda-icon svg {
+    width: 21px;
+    height: 21px;
+    stroke: #fff;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linejoin: round;
+    stroke-linecap: round
+}
+
+.ajuda-page .ajuda-topic h3 {
+    margin-top: 10px;
+    line-height: 1.3
+}
+
+.ajuda-page .ajuda-topic p {
+    margin-top: 0
+}
+
+.ajuda-page .ajuda-topic-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    color: #c9b8ff;
+    font-size: 13px;
+    font-weight: 600
+}
+
+.ajuda-page .ajuda-topic-more span {
+    transition: transform .2s
+}
+
+.ajuda-page .ajuda-topic:hover .ajuda-topic-more span {
+    transform: translateX(5px)
+}
+
+.ajuda-page .ajuda-faq-section {
+    padding: 0;
+    margin-top: 104px;
+    scroll-margin-top: 110px
+}
+
+.ajuda-page .ajuda-faq-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap
+}
+
+.ajuda-page .ajuda-faq-heading .cap {
+    display: block;
+    margin-bottom: 16px
+}
+
+
+
+.ajuda-page .ajuda-faq-heading p {
+    max-width: 345px;
+    color: var(--mut);
+    font-size: 16px;
+    line-height: 1.6
+}
+
+.ajuda-page .ajuda-faq-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(290px, 396px);
+    gap: 18px;
+    align-items: start;
+    margin-top: 48px
+}
+
+/* Lista de perguntas no mesmo padrão do FAQ da landing (.faq .it / .q / .a) */
+.ajuda-page .ajuda-faq-panel {
+    display: grid;
+    gap: 12px
+}
+
+.ajuda-page .ajuda-qa {
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: var(--surf);
+    transition: border-color .3s, background .3s
+}
+
+.ajuda-page .ajuda-qa:hover {
+    border-color: rgba(255, 255, 255, .18)
+}
+
+.ajuda-page .ajuda-qa.open {
+    border-color: rgba(123, 77, 255, .6);
+    background: var(--surf2)
+}
+
+.ajuda-page .ajuda-qa>button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    padding: 20px 24px;
+    border: 0;
+    border-radius: inherit;
+    background: none;
+    color: var(--tx);
+    font: inherit;
+    font-weight: 600;
+    text-align: left;
+    line-height: 1.45;
+    cursor: pointer
+}
+
+.ajuda-page .ajuda-toggle {
+    flex: none;
+    position: relative;
+    width: 22px;
+    height: 22px
+}
+
+.ajuda-page .ajuda-toggle::before,
+.ajuda-page .ajuda-toggle::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    right: 3px;
+    top: 10px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--g);
+    transition: transform .35s var(--ease)
+}
+
+.ajuda-page .ajuda-toggle::after {
+    transform: rotate(90deg)
+}
+
+.ajuda-page .ajuda-qa.open .ajuda-toggle::after {
+    transform: rotate(0)
+}
+
+.ajuda-page .ajuda-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .45s var(--ease)
+}
+
+.ajuda-page .ajuda-qa.open .ajuda-answer {
+    grid-template-rows: 1fr
+}
+
+.ajuda-page .ajuda-answer>div {
+    overflow: hidden
+}
+
+.ajuda-page .ajuda-answer p {
+    padding: 0 24px 22px;
+    color: var(--mut);
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.7
+}
+
+.ajuda-page .ajuda-empty {
+    border: 1px dashed var(--line);
+    border-radius: 20px;
+    text-align: center;
+    padding: 48px 0
+}
+
+.ajuda-page .ajuda-empty strong {
+    display: block;
+    font-size: 18px
+}
+
+.ajuda-page .ajuda-empty p {
+    margin-top: 6px;
+    color: var(--mut);
+    font-size: 14px
+}
+
+.ajuda-page .ajuda-empty a {
+    color: #c9b8ff;
+    text-decoration: underline
+}
+
+.ajuda-page .ajuda-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: sticky;
+    top: 100px
+}
+
+.ajuda-page .ajuda-aside-card h3 {
+    font-size: 16px
+}
+
+.ajuda-page .ajuda-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 22px
+}
+
+.ajuda-page .ajuda-steps>div {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start
+}
+
+.ajuda-page .ajuda-steps>div>span {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(155, 107, 255, .35);
+    background: rgba(123, 77, 255, .15);
+    color: #c9b8ff;
+    font-size: 13px;
+    font-weight: 600
+}
+
+.ajuda-page .ajuda-steps h4 {
+    font-size: 15px;
+    line-height: 1.3
+}
+
+.ajuda-page .ajuda-steps p {
+    font-size: 13px;
+    color: var(--mut);
+    line-height: 1.6;
+    margin-top: 3px
+}
+
+.ajuda-page .ajuda-mail {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none
+}
+
+.ajuda-page .ajuda-mail strong {
+    display: block;
+    font-size: 16px
+}
+
+.ajuda-page .ajuda-mail small {
+    display: block;
+    margin-top: 3px;
+    color: var(--mut);
+    font-size: 13px
+}
+
+.ajuda-page .ajuda-art {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 220px;
+    padding: 28px;
+    border-radius: 26px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #5B3CF5, #C73A68 50%, #FF8A4C)
+}
+
+.ajuda-page .ajuda-art .ajuda-art-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none
+}
+
+.ajuda-page .ajuda-art small {
+    position: relative;
+    margin-bottom: 10px;
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .8)
+}
+
+.ajuda-page .ajuda-art strong {
+    position: relative;
+    font-size: 30px;
+    line-height: 1.15
+}
+
+.ajuda-page .ajuda-cta-section {
+    padding: 96px 0 0
+}
+
+/* ===== resultados da busca (abaixo do campo) ===== */
+.ajuda-page .ajuda-search-results {
+    width: min(560px, 100%);
+    margin-top: 10px;
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    background: rgba(12, 10, 20, .92);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+    text-align: left;
+    animation: ajudaFadeIn .25s ease both
+}
+
+.ajuda-page .ajuda-search-count {
+    display: block;
+    padding: 8px 14px 6px;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--mut)
+}
+
+.ajuda-page .ajuda-search-results>button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    width: 100%;
+    padding: 12px 14px;
+    border: 0;
+    border-radius: 14px;
+    background: none;
+    color: var(--tx);
+    font: inherit;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: background .2s
+}
+
+.ajuda-page .ajuda-search-results>button:hover,
+.ajuda-page .ajuda-search-results>button:focus-visible {
+    background: var(--surf2)
+}
+
+.ajuda-page .ajuda-search-results>button span:last-child {
+    color: #c9b8ff
+}
+
+.ajuda-page .ajuda-search-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 18px 14px 14px;
+    text-align: center
+}
+
+.ajuda-page .ajuda-search-empty p {
+    margin: 0 0 8px;
+    max-width: none;
+    font-size: 13px;
+    color: var(--mut)
+}
+
+.ajuda-page .ajuda-search-empty a,
+.ajuda-page .ajuda-empty a {
+    color: #c9b8ff;
+    text-decoration: underline
+}
+
+/* ===== status do FAQ (filtro ativo + ver todas) ===== */
+.ajuda-page .ajuda-faq-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 6px 4px;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--mut)
+}
+
+.ajuda-page .ajuda-faq-status button {
+    padding: 6px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surf);
+    color: var(--tx);
+    font: inherit;
+    font-size: 11px;
+    letter-spacing: .1em;
+    cursor: pointer;
+    transition: border-color .2s
+}
+
+.ajuda-page .ajuda-faq-status button:hover {
+    border-color: rgba(123, 77, 255, .6)
+}
+
+.ajuda-page .ajuda-empty .btn {
+    margin-top: 18px
+}
+
+@keyframes ajudaFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px)
+    }
+
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+
+/* ===== arte "Uma dúvida. Uma resposta." ===== */
+.ajuda-art-line {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 0;
+    animation: ajudaLine 6s cubic-bezier(.45, 0, .2, 1) infinite
+}
+
+.ajuda-art-check {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 0;
+    animation: ajudaCheck 6s ease infinite
+}
+
+.ajuda-art-pulse {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: ajudaPulse 6s ease-out infinite
+}
+
+.ajuda-art-ask {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: ajudaAsk 6s ease-in-out infinite
+}
+
+.ajuda-art-spark {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: ajudaSpark 3s ease-in-out infinite
+}
+
+.ajuda-art-spark--late {
+    animation-delay: 1.5s
+}
+
+.ajuda-art:hover .ajuda-art-line,
+.ajuda-art:hover .ajuda-art-check,
+.ajuda-art:hover .ajuda-art-pulse,
+.ajuda-art:hover .ajuda-art-ask {
+    animation-duration: 4s
+}
+
+@keyframes ajudaLine {
+    0% { stroke-dashoffset: 100; opacity: 1 }
+    40% { stroke-dashoffset: 0 }
+    85% { stroke-dashoffset: 0; opacity: 1 }
+    100% { stroke-dashoffset: 0; opacity: 0 }
+}
+
+@keyframes ajudaCheck {
+    0%, 40% { stroke-dashoffset: 100 }
+    55%, 100% { stroke-dashoffset: 0 }
+}
+
+@keyframes ajudaPulse {
+    0%, 50% { transform: scale(1); opacity: 0 }
+    55% { opacity: .9 }
+    85%, 100% { transform: scale(1.7); opacity: 0 }
+}
+
+@keyframes ajudaAsk {
+    0%, 100% { transform: translateY(0) rotate(0) }
+    10% { transform: translateY(-3px) rotate(-6deg) }
+    20% { transform: translateY(0) rotate(4deg) }
+    30% { transform: rotate(0) }
+}
+
+@keyframes ajudaSpark {
+    0%, 100% { opacity: .25; transform: scale(.6) }
+    50% { opacity: 1; transform: scale(1.15) }
+}
+
+.calm .ajuda-art-line,
+.calm .ajuda-art-check,
+.calm .ajuda-art-pulse,
+.calm .ajuda-art-ask,
+.calm .ajuda-art-spark,
+.calm .ajuda-page .ajuda-search-results {
+    animation: none
+}
+
+.calm .ajuda-art-pulse {
+    opacity: 0
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ajuda-art-line,
+    .ajuda-art-check,
+    .ajuda-art-pulse,
+    .ajuda-art-ask,
+    .ajuda-art-spark,
+    .ajuda-page .ajuda-search-results {
+        animation: none
+    }
+
+    .ajuda-art-pulse {
+        opacity: 0
+    }
+}
+
+.ajuda-page footer {
+    position: relative;
+    z-index: 1
+}
+
+@media(max-width:1050px) {
+    .ajuda-page .ajuda-faq-layout {
+        grid-template-columns: 1fr
+    }
+
+    .ajuda-page .ajuda-aside {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+
+    .ajuda-page .ajuda-art {
+        grid-column: 1/-1
+    }
+
+    .ajuda-page .ajuda-topics {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+}
+
+@media(max-width:700px) {
+    .ajuda-page .ajuda-hero {
+        padding-top: 72px
+    }
+
+    .ajuda-page .ajuda-topics {
+        grid-template-columns: 1fr;
+        margin-top: 54px
+    }
+
+    .ajuda-page .ajuda-topic {
+        min-height: 215px
+    }
+
+    .ajuda-page .ajuda-faq-section {
+        margin-top: 75px
+    }
+
+    .ajuda-page .ajuda-aside {
+        display: flex
+    }
+
+    .ajuda-page .ajuda-cta-section {
+        padding-top: 70px
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    .ajuda-page .ajuda-answer,
+    .ajuda-page .ajuda-toggle {
+        transition: none
+    }
+}
