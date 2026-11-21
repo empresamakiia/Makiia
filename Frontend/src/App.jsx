@@ -13,8 +13,9 @@ import TermosDeUso from "./pages/TermodeUso/TermosdeUso";
 import CookieBanner from "./components/CookieBanner/CookieBanner";
 import CookieConsentProvider from "./consent/CookieConsentProvider";
 
-// Página Sobre
+// Seção Empresa
 import Sobre from "./pages/Sobre/Sobre";
+import Blog from "./pages/Blog/Blog";
 
 function App() {
   useEffect(() => {
@@ -44,6 +45,7 @@ function App() {
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/termos" element={<TermosDeUso />} />
           <Route path="/sobre" element={<Sobre />} />
+          <Route path="/blog" element={<Blog />} />
         </Routes>
 
         <CookieBanner />
