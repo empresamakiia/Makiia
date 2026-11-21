@@ -764,7 +764,7 @@ export default function Home() {
             <div>
               <h4>Empresa</h4>
               <a href="/sobre">Sobre</a>
-              <a href="#">Blog</a>
+              <a href="/blog">Blog</a>
               <a href="#">Contato</a>
               <a href="#">Ajuda</a>
             </div>
