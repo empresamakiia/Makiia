@@ -1,18 +1,19 @@
 import { useEffect, useMemo, useState } from "react";
 import initLanding from "../Home/Main.js";
-import Logo from "../../components/Logo/Logo.jsx";
+import SiteNav from "../../components/SiteNav/SiteNav.jsx";
+import SiteFooter from "../../components/SiteFooter/SiteFooter.jsx";
 import BlogCover from "./BlogCovers.jsx";
 import "../Home/Home.css";
 import "./Blog.css";
 
 const posts = [
-    { id: "makiia-2", category: "Produto", title: "MAKIIA 2: raciocínio criativo estendido chegou", summary: "Entenda o que muda na forma como a IA lê o seu briefing e mantém cada peça coerente com a marca.", minutes: 4, art: "reasoning", featured: true, issue: "01" },
+    { id: "makiia-2", category: "Produto", title: "MAKIIA 2: raciocínio criativo estendido chegou", summary: "Entenda o que muda na forma como a IA lê o seu briefing e mantém cada peça coerente com a campanha.", minutes: 4, art: "reasoning", featured: true, issue: "01" },
     { id: "briefing", category: "Branding", title: "Como criar um briefing que a IA entende de verdade", summary: "Um bom projeto começa com uma ideia bem contada.", minutes: 5, art: "briefing" },
     { id: "consistencia", category: "Dicas", title: "Consistência visual do primeiro post à campanha completa", summary: "Faça todas as peças falarem a mesma língua.", minutes: 6, art: "system" },
-    { id: "paleta", category: "Branding", title: "Paleta de cores: como escolher a certa para a sua marca", summary: "Cores que traduzem a personalidade do seu negócio.", minutes: 5, art: "palette" },
+    { id: "paleta", category: "Branding", title: "Paleta de cores: como escolher a certa para a sua campanha", summary: "Cores que traduzem a personalidade do seu negócio.", minutes: 5, art: "palette" },
     { id: "brand-kit", category: "Dicas", title: "Do logo ao brand kit: o que entregar ao cliente", summary: "Organize os elementos essenciais da sua identidade.", minutes: 7, art: "kit" },
     { id: "formatos", category: "Dicas", title: "Os formatos certos para cada canal", summary: "Escolha dimensões apropriadas para cada publicação.", minutes: 4, art: "formats" },
-    { id: "bastidores", category: "Bastidores", title: "Bastidores: como a MAKIIA pensa uma identidade", summary: "Conheça o processo por trás de uma marca coerente.", minutes: 6, art: "construction" },
+    { id: "bastidores", category: "Bastidores", title: "Bastidores: como a MAKIIA pensa uma identidade", summary: "Conheça o processo por trás de uma campanha coerente.", minutes: 6, art: "construction" },
 ];
 const categories = ["Todos", "Branding", "Produto", "Dicas", "Bastidores"];
 
@@ -86,24 +87,12 @@ export default function Blog() {
         <div id="cursor" aria-hidden="true" />
         <div className="progress" aria-hidden="true"><i /></div>
 
-        <nav id="nav">
-            <div className="w"><div className="nv">
-                <a className="logo" href="/" aria-label="MAKIIA, início"><Logo size={28} /></a>
-                <div className="lk" id="lk">
-                    <a href="/sobre">Sobre</a><a className="act" href="/blog" aria-current="page">Blog</a>
-                    <a href="/contato">Contato</a><a href="/ajuda">Ajuda</a>
-                    <div className="lk-m"><a className="btn" href="/login">Entrar</a><a className="btn pri" href="/login#cadastro">Começar grátis</a></div>
-                </div>
-                <div className="ac"><a className="btn sm" href="/login">Entrar</a><a className="btn sm pri mag" href="/login#cadastro">Começar grátis</a>
-                    <button className="burger" id="burger" aria-label="Abrir menu" aria-expanded="false"><span /><span /></button>
-                </div>
-            </div></div>
-        </nav>
+        <SiteNav active="/blog" />
 
         <main id="top">
             <header className="w hero blog-hero">
                 <span className="pill rv"><b>BLOG</b>O universo criativo da MAKIIA</span>
-                <h1 data-split>Ideias que inspiram. <span className="gt">Marcas que ficam.</span></h1>
+                <h1 data-split>Ideias que inspiram. <span className="gt">Campanhas que ficam.</span></h1>
                 <p className="rv" style={{ "--d": ".25s" }}>Um espaço para explorar branding, design e criatividade — com histórias, referências e novas perspectivas.</p>
                 <div className="blog-hero-bottom rv" style={{ "--d": ".35s" }}><span>MAKIIA / JOURNAL</span><span>DESIGN · BRANDING · IDEIAS</span><span>EXPLORE ↓</span></div>
             </header>
@@ -147,23 +136,18 @@ export default function Blog() {
                     </div>
                     <aside className="blog-sidebar" aria-label="Explore o blog">
                         <div className="blog-sidebar-panel"><span className="cap ac">EXPLORE POR TEMA</span><h3>Encontre sua próxima ideia.</h3><div className="blog-topic-list">{categories.filter((c) => c !== "Todos").map((cat, i) => <button type="button" key={cat} onClick={() => { setCategory(cat); setSearch(""); setShowAll(false); }}><span>{String(i + 1).padStart(2, "0")} / {cat}</span><span aria-hidden="true">↗</span></button>)}</div></div>
-                        <div className="blog-side-quote"><span className="cap ac">NOTAS DE CRIAÇÃO</span><p>Boas marcas não nascem prontas. Elas ganham forma a cada ideia.</p><span>— MAKIIA JOURNAL</span></div>
+                        <div className="blog-side-quote"><span className="cap ac">NOTAS DE CRIAÇÃO</span><p>Boas campanhas não nascem prontas. Elas ganham forma a cada ideia.</p><span>— MAKIIA JOURNAL</span></div>
                     </aside>
                 </div>
             </section>
 
-            <section className="blog-newsletter-section"><div className="w"><div className="grow" data-grow="0.92"><div className="blog-newsletter cta">
+            <section className="blog-newsletter-section"><div className="w"><div className="grow" data-grow="0.92"><div className="blog-newsletter cta cta-soft">
                 <div className="blog-newsletter-kicker"><span className="cap ac">UMA BOA LEITURA NA SUA CAIXA DE ENTRADA</span><span>MAKIIA / LETTER</span></div>
-                <div className="blog-newsletter-content"><div><h2>Continue a conversa <span className="gt">fora daqui.</span></h2><p>Ideias, referências e novidades sobre marcas e criatividade. Sem ruído, só o que vale a leitura.</p></div><div className="blog-newsletter-signup"><form onSubmit={handleNewsletter} className="blog-subscribe"><label className="blog-visually-hidden" htmlFor="blog-email">Seu e-mail</label><input id="blog-email" type="email" required placeholder="Seu melhor e-mail" value={email} onChange={(e) => { setEmail(e.target.value); setEmailMessage(""); }} /><button type="submit" className="btn pri">Quero receber ↗</button></form><span>Uma newsletter editorial. Sem spam.</span>{emailMessage && <p className="blog-form-message" role="status">{emailMessage}</p>}</div></div>
+                <div className="blog-newsletter-content"><div><h2>Continue a conversa <span className="gt">fora daqui.</span></h2><p>Ideias, referências e novidades sobre campanhas e criatividade. Sem ruído, só o que vale a leitura.</p></div><div className="blog-newsletter-signup"><form onSubmit={handleNewsletter} className="blog-subscribe"><label className="blog-visually-hidden" htmlFor="blog-email">Seu e-mail</label><input id="blog-email" type="email" required placeholder="Seu melhor e-mail" value={email} onChange={(e) => { setEmail(e.target.value); setEmailMessage(""); }} /><button type="submit" className="btn pri">Quero receber ↗</button></form><span>Uma newsletter editorial. Sem spam.</span>{emailMessage && <p className="blog-form-message" role="status">{emailMessage}</p>}</div></div>
             </div></div></div></section>
         </main>
 
-        <footer><div className="w"><div className="fg">
-            <div><a className="logo" href="/"><Logo size={28} /></a><p>IA criativa para quem constrói marcas: logos, identidade visual e peças em uma só conversa.</p></div>
-            <div><h4>Produto</h4><a href="/#recursos">Recursos</a><a href="/#como">Como funciona</a><a href="/#planos">Planos</a><a href="/#faq">Dúvidas</a></div>
-            <div><h4>Empresa</h4><a href="/sobre">Sobre</a><a href="/blog">Blog</a><a href="/contato">Contato</a><a href="/ajuda">Ajuda</a></div>
-            <div><h4>Legal</h4><a href="/termos">Termos de uso</a><a href="/privacidade">Privacidade</a><a href="/cookies">Cookies</a></div>
-        </div><div className="big" aria-hidden="true">MAKIIA</div><div className="fb"><span>© 2026 MAKIIA</span><a href="#top">Voltar ao topo</a></div></div></footer>
+        <SiteFooter active="/blog" />
 
         {selectedPost && <div className="blog-dialog-backdrop" onClick={() => setSelectedPost(null)}>
             <div className="blog-dialog" role="dialog" aria-modal="true" aria-labelledby="blog-dialog-title" onClick={(event) => event.stopPropagation()}>
