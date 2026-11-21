@@ -1,7 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AuthPanel from "../../components/AuthPanel/AuthPanel";
+import {
+  fetchCurrentUser,
+  login,
+  requestPasswordReset,
+  resetPassword,
+} from "../../services/auth";
 import "./Login.css";
+
+const MIN_PASSWORD = 8;
 
 function Login() {
   const navigate = useNavigate();
@@ -11,6 +19,30 @@ function Login() {
   const [rememberMe, setRememberMe] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [feedback, setFeedback] = useState(null); // { type: "error" | "success", text }
+
+  // Recuperação de senha: null (fechada) → "email" → "token"
+  const [resetStep, setResetStep] = useState(null);
+  const [resetEmail, setResetEmail] = useState("");
+  const [resetToken, setResetToken] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [resetLoading, setResetLoading] = useState(false);
+  const [resetFeedback, setResetFeedback] = useState(null);
+
+  // Quem já tem uma sessão válida vai direto para o chat.
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchCurrentUser({ signal: controller.signal })
+      .then((user) => {
+        if (user) navigate("/chat", { replace: true });
+      })
+      .catch(() => {
+        /* backend fora do ar: segue na tela de login normalmente */
+      });
+    return () => controller.abort();
+  }, [navigate]);
 
   function transitionToRegister() {
     if (isLeaving) return;
@@ -24,18 +56,81 @@ function Login() {
     );
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    if (isSubmitting) return;
 
-    if (!email.trim() || !password.trim()) {
-      window.alert("Preencha seu e-mail e sua senha.");
+    if (!email.trim() || !password) {
+      setFeedback({ type: "error", text: "Preencha seu e-mail e sua senha." });
       return;
     }
 
-    // TODO: conectar ao backend (login)
-    window.alert(
-      "A tela está pronta! Agora você pode conectar o login ao backend.",
-    );
+    setIsSubmitting(true);
+    setFeedback(null);
+    try {
+      await login(email, password, { remember: rememberMe });
+      navigate("/chat");
+    } catch (error) {
+      setFeedback({ type: "error", text: error.message });
+      setIsSubmitting(false);
+    }
+  }
+
+  function openReset() {
+    setResetEmail(email);
+    setResetToken("");
+    setNewPassword("");
+    setConfirmPassword("");
+    setResetFeedback(null);
+    setFeedback(null);
+    setResetStep("email");
+  }
+
+  function closeReset(message) {
+    setResetStep(null);
+    setResetFeedback(null);
+    if (message) setFeedback({ type: "success", text: message });
+  }
+
+  async function handleResetRequest(event) {
+    event.preventDefault();
+    if (resetLoading) return;
+    setResetLoading(true);
+    setResetFeedback(null);
+    try {
+      const data = await requestPasswordReset(resetEmail);
+      setResetStep("token");
+      setResetFeedback({ type: "success", text: data?.mensagem || "Pedido enviado." });
+    } catch (error) {
+      setResetFeedback({ type: "error", text: error.message });
+    } finally {
+      setResetLoading(false);
+    }
+  }
+
+  async function handleResetConfirm(event) {
+    event.preventDefault();
+    if (resetLoading) return;
+    if (newPassword.length < MIN_PASSWORD) {
+      setResetFeedback({ type: "error", text: `A nova senha precisa ter pelo menos ${MIN_PASSWORD} caracteres.` });
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setResetFeedback({ type: "error", text: "As senhas não coincidem." });
+      return;
+    }
+    setResetLoading(true);
+    setResetFeedback(null);
+    try {
+      await resetPassword(resetToken, newPassword);
+      setEmail(resetEmail);
+      setPassword("");
+      closeReset("Senha redefinida. Entre com a nova senha.");
+    } catch (error) {
+      setResetFeedback({ type: "error", text: error.message });
+    } finally {
+      setResetLoading(false);
+    }
   }
 
   function handleSocialLogin(provider) {
@@ -90,10 +185,116 @@ function Login() {
 
           <div className="auth-stage">
             <div className="login-heading stagger" style={{ "--i": 0 }}>
-              <h1>Bem-vindo de volta</h1>
-              <p>Entre para continuar criando as suas marcas.</p>
+              <h1>{resetStep ? "Recuperar senha" : "Bem-vindo de volta"}</h1>
+              <p>
+                {resetStep === "email" &&
+                  "Informe o e-mail da sua conta para receber o código de recuperação."}
+                {resetStep === "token" &&
+                  "Digite o código recebido e escolha uma nova senha."}
+                {!resetStep && "Entre para continuar criando as suas marcas."}
+              </p>
             </div>
 
+            {resetStep ? (
+              <div className="reset-panel">
+                {resetStep === "email" ? (
+                  <form className="login-form" onSubmit={handleResetRequest} noValidate>
+                    <div className="form-field">
+                      <label htmlFor="reset-email">E-MAIL</label>
+                      <div className="input-wrapper">
+                        <span className="input-symbol">@</span>
+                        <input
+                          id="reset-email"
+                          type="email"
+                          placeholder="seuemail@gmail.com"
+                          value={resetEmail}
+                          onChange={(event) => setResetEmail(event.target.value)}
+                          autoComplete="email"
+                          required
+                          autoFocus
+                        />
+                      </div>
+                    </div>
+                    {resetFeedback && (
+                      <p className={`login-feedback is-${resetFeedback.type}`} role="alert">
+                        {resetFeedback.text}
+                      </p>
+                    )}
+                    <button className="submit-button" type="submit" disabled={resetLoading || !resetEmail.trim()}>
+                      {resetLoading ? "Enviando…" : "Enviar código"}
+                    </button>
+                  </form>
+                ) : (
+                  <form className="login-form" onSubmit={handleResetConfirm} noValidate>
+                    {resetFeedback && (
+                      <p className={`login-feedback is-${resetFeedback.type}`} role="status">
+                        {resetFeedback.text}
+                      </p>
+                    )}
+                    <div className="form-field">
+                      <label htmlFor="reset-token">CÓDIGO DE RECUPERAÇÃO</label>
+                      <div className="input-wrapper">
+                        <span className="input-symbol">#</span>
+                        <input
+                          id="reset-token"
+                          type="text"
+                          placeholder="Cole o código recebido"
+                          value={resetToken}
+                          onChange={(event) => setResetToken(event.target.value)}
+                          autoComplete="one-time-code"
+                          required
+                          autoFocus
+                        />
+                      </div>
+                    </div>
+                    <div className="form-field">
+                      <label htmlFor="reset-password">NOVA SENHA</label>
+                      <div className="input-wrapper">
+                        <span className="input-symbol password-symbol">●</span>
+                        <input
+                          id="reset-password"
+                          type="password"
+                          placeholder={`Mínimo de ${MIN_PASSWORD} caracteres`}
+                          value={newPassword}
+                          onChange={(event) => setNewPassword(event.target.value)}
+                          autoComplete="new-password"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="form-field">
+                      <label htmlFor="reset-confirm">CONFIRMAR NOVA SENHA</label>
+                      <div className="input-wrapper">
+                        <span className="input-symbol password-symbol">●</span>
+                        <input
+                          id="reset-confirm"
+                          type="password"
+                          placeholder="Repita a nova senha"
+                          value={confirmPassword}
+                          onChange={(event) => setConfirmPassword(event.target.value)}
+                          autoComplete="new-password"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <button
+                      className="submit-button"
+                      type="submit"
+                      disabled={resetLoading || !resetToken.trim() || !newPassword || !confirmPassword}
+                    >
+                      {resetLoading ? "Salvando…" : "Redefinir senha"}
+                    </button>
+                    <button className="reset-link" type="button" onClick={() => setResetStep("email")}>
+                      Não recebeu? Enviar o código de novo
+                    </button>
+                  </form>
+                )}
+                <button className="reset-back" type="button" onClick={() => closeReset()}>
+                  ← Voltar para o login
+                </button>
+              </div>
+            ) : (
+            <>
             <div className="social-login stagger" style={{ "--i": 1 }}>
               <button
                 className="social-button"
@@ -174,11 +375,7 @@ function Login() {
                   <button
                     className="forgot-password"
                     type="button"
-                    onClick={() =>
-                      window.alert(
-                        "Conecte esta opção ao fluxo de recuperação de senha.",
-                      )
-                    }
+                    onClick={openReset}
                   >
                     Esqueci a senha
                   </button>
@@ -219,14 +416,27 @@ function Login() {
                 <span>Manter conectado neste dispositivo</span>
               </label>
 
+              {feedback && (
+                <p
+                  className={`login-feedback is-${feedback.type}`}
+                  role={feedback.type === "error" ? "alert" : "status"}
+                >
+                  {feedback.text}
+                </p>
+              )}
+
               <button
                 className="submit-button stagger"
                 style={{ "--i": 6 }}
                 type="submit"
+                disabled={isSubmitting}
+                aria-busy={isSubmitting}
               >
-                Entrar na MAKIIA
+                {isSubmitting ? "Entrando…" : "Entrar na MAKIIA"}
               </button>
             </form>
+            </>
+            )}
 
             <p className="switch-mode stagger" style={{ "--i": 7 }}>
               Ainda não tem conta?{" "}

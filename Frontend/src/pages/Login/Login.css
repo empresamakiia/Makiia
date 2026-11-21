@@ -1140,3 +1140,88 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ---------- Integração com a API: mensagens, carregamento e recuperação de senha ---------- */
+.login-feedback {
+  margin: 0;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid transparent;
+  border-radius: 0.8rem;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  animation: login-feedback-in 0.25s ease both;
+}
+
+.login-feedback.is-error {
+  border-color: rgb(255 107 107 / 35%);
+  color: #ffb4b4;
+  background: rgb(255 80 80 / 9%);
+}
+
+.login-feedback.is-success {
+  border-color: rgb(120 220 160 / 30%);
+  color: #b8f0cf;
+  background: rgb(80 200 130 / 8%);
+}
+
+@keyframes login-feedback-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.submit-button:disabled {
+  cursor: progress;
+  opacity: 0.65;
+  transform: none;
+  box-shadow: none;
+}
+
+.submit-button:disabled::after {
+  display: none;
+}
+
+.reset-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  animation: login-feedback-in 0.3s ease both;
+}
+
+.reset-link,
+.reset-back {
+  align-self: center;
+  padding: 0.2rem;
+  border: 0;
+  background: transparent;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.reset-link {
+  color: #ff854f;
+}
+
+.reset-link:hover {
+  color: #ffb38b;
+}
+
+.reset-back {
+  color: #aaa1b3;
+}
+
+.reset-back:hover {
+  color: #f8f5ff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-feedback,
+  .reset-panel {
+    animation: none;
+  }
+}
