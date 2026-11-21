@@ -1,5 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import "./Chat.css";
+import AiPicker from "./AiPicker";
+import Logo from "../../components/Logo/Logo.jsx";
+
 
 const initialMessages = [
   {
@@ -86,8 +89,19 @@ const demoPlugins = [
   "Unsplash",
   "Brand Assets",
 ];
-const models = ["Makiia Studio", "Makiia Vision", "Makiia Pro"];
-const levels = ["Baixo", "Médio", "Alto", "Extra alto"];
+
+const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:8000").replace(/\/$/, "");
+
+function readSession() {
+  try {
+    const raw = sessionStorage.getItem("makiia.session") || localStorage.getItem("makiia.session");
+    const session = raw ? JSON.parse(raw) : null;
+    return session?.token ? session : null;
+  } catch { return null; }
+}
+function getInitials(name = "") {
+  return name.trim().split(/\s+/).slice(0, 2).map(x => x[0]?.toUpperCase()).join("") || "?";
+}
 const posterSizes = {
   Feed: [1080, 1350],
   Story: [1080, 1920],
@@ -302,16 +316,53 @@ export default function Chat() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [search, setSearch] = useState("");
   const [notice, setNotice] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
   const [modelOpen, setModelOpen] = useState(false);
   const [dialog, setDialog] = useState(null);
-  const [selectedModel, setSelectedModel] = useState("Makiia Studio");
-  const [reasoning, setReasoning] = useState("Médio");
+  const [selectedModel, setSelectedModel] = useState("gemini");
+  const [session, setSession] = useState(readSession);
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+
   const [selectedPlugins, setSelectedPlugins] = useState([]);
   const [demoMode, setDemoMode] = useState("Logo");
   const chatEnd = useRef(null);
   const messageCount = useRef(initialMessages.length);
+
+  // Usa a sessão criada pelo fluxo de login/cadastro, sem inventar usuário ou plano.
+  useEffect(() => {
+    const current = readSession();
+    if (!current?.token) return;
+    const controller = new AbortController();
+    fetch(`${API_URL}/auth/me`, {
+      headers: { Authorization: `Bearer ${current.token}` },
+      signal: controller.signal,
+    }).then(async response => {
+      if (response.status === 401) {
+        sessionStorage.removeItem("makiia.session");
+        localStorage.removeItem("makiia.session");
+        setSession(null);
+        return;
+      }
+      if (response.ok) {
+        const usuario = await response.json();
+        setSession(old => old ? { ...old, usuario } : null);
+      }
+    }).catch(() => { });
+    return () => controller.abort();
+  }, []);
+
+
+  const handleModelOpen = useCallback((value) => {
+    setModelOpen(value);
+    if (value) setToolsOpen(false);
+  }, []);
+
+  const logout = () => {
+    sessionStorage.removeItem("makiia.session");
+    localStorage.removeItem("makiia.session");
+    window.location.assign("/login");
+  };
 
   useEffect(() => {
     if (messages.length > messageCount.current)
@@ -324,22 +375,10 @@ export default function Chat() {
     return () => clearTimeout(timeout);
   }, [notice]);
 
+  // Sprint 2: interface do chat e seletor visual. A integração real de IA será feita em outra sprint.
   const sendMessage = (content = draft) => {
-    const text = content.trim();
-    if (!text || loading) return;
-    setDraft("");
-    setMessages((old) => [...old, { role: "user", text }]);
-    setLoading(true);
-    window.setTimeout(() => {
-      setMessages((old) => [
-        ...old,
-        {
-          role: "assistant",
-          text: "Recebi sua solicitação. Esta é uma demonstração de interface: conecte sua API de IA para gerar respostas e peças personalizadas de verdade.",
-        },
-      ]);
-      setLoading(false);
-    }, 500);
+    if (!content.trim() || loading) return;
+    setNotice("O envio para IA será habilitado quando a API for integrada na próxima sprint.");
   };
 
   const exportSVG = () => {
@@ -418,17 +457,10 @@ export default function Chat() {
       )}
       <aside className={`mk-sidebar ${mobileMenu ? "is-open" : ""}`}>
         <div className="mk-sidebar-top">
-          <div className="mk-brand-logo" aria-label="Makiia">
-            <span className="mk-brand-symbol">
-              <AppIcon name="sparkles" size={21} />
-            </span>
-            <div>
-              <strong>
-                Makiia<span className="mk-brand-period">.</span>
-              </strong>
-              <small>CREATIVE INTELLIGENCE</small>
-            </div>
-          </div>
+          <a className="mk-brand-logo mk-brand-home" href="/" aria-label="MAKIIA, página inicial">
+            <Logo size={30} />
+            <small>Studio criativo</small>
+          </a>
           <button
             className="mk-new-btn"
             onClick={() => {
@@ -448,6 +480,8 @@ export default function Chat() {
             />
           </label>
         </div>
+        {/* Projetos e recentes rolam; topo (logo, nova conversa, busca) e rodapé (conta) ficam fixos */}
+        <div className="mk-side-scroll">
         <div className="mk-side-group">
           <p>Projetos de marca</p>
           {projectNames
@@ -484,6 +518,7 @@ export default function Chat() {
               </button>
             ))}
         </div>
+        </div>
         <div className="mk-sidebar-bottom">
           <div className="mk-side-tools">
             <button
@@ -497,13 +532,23 @@ export default function Chat() {
               <AppIcon name="palette" /> Brand kit
             </button>
           </div>
-          <div className="mk-account">
-            <div className="mk-avatar">E</div>
-            <div>
-              <strong>Minha conta</strong>
-              <small>Plano Pro</small>
-            </div>
-            <span className="mk-pro">PRO</span>
+          <div className="mk-account-control">
+            <button type="button" className="mk-account mk-account-button"
+              onClick={() => setAccountMenuOpen(v => !v)}
+              aria-expanded={accountMenuOpen} aria-label="Opções da conta">
+              <span className="mk-avatar">{getInitials(session?.usuario?.nome)}</span>
+              <span className="mk-account-details">
+                <strong>{session?.usuario?.nome || "Visitante"}</strong>
+                <small>{session?.usuario?.email || "Faça login para continuar"}</small>
+              </span>
+              <AppIcon name="chevron" size={16} />
+            </button>
+            {accountMenuOpen && (
+              <div className="mk-account-menu">
+                {session ? <button type="button" onClick={logout}>Sair da conta</button>
+                  : <a href="/login">Entrar na Makiia</a>}
+              </div>
+            )}
           </div>
         </div>
       </aside>
@@ -537,9 +582,15 @@ export default function Chat() {
             <button onClick={exportPNG}>
               <AppIcon name="download" size={13} /> Exportar
             </button>
-            <span className="mk-model">
-              <i /> MAKIIA 2 · MODO CRIATIVO
-            </span>
+            <AiPicker
+              selectedId={selectedModel}
+              open={modelOpen}
+              onOpenChange={handleModelOpen}
+              onSelect={(model) => {
+                setSelectedModel(model.id);
+                setNotice(`${model.name} selecionada para visualização. Integração prevista para a próxima sprint.`);
+              }}
+            />
           </div>
         </header>
         <div className="mk-chat-scroll">
@@ -770,7 +821,7 @@ export default function Chat() {
             </div>
           </form>
           <p className="mk-disclaimer">
-            A MAKIIA pode errar. Revise as peças antes de publicar.
+            "Prévia de interface: as IAs do catálogo ainda não estão conectadas."
           </p>
         </div>
       </main>
@@ -865,7 +916,7 @@ export default function Chat() {
                       dialog === "audio"
                         ? "mic"
                         : toolOptions.find((item) => item.id === dialog)
-                            ?.icon || "sparkles"
+                          ?.icon || "sparkles"
                     }
                     size={20}
                   />
@@ -875,7 +926,7 @@ export default function Chat() {
                     {dialog === "audio"
                       ? "Áudio e voz"
                       : toolOptions.find((item) => item.id === dialog)?.name ||
-                        "Ferramenta"}
+                      "Ferramenta"}
                   </strong>
                   <small>Prévia da funcionalidade · Sem backend</small>
                 </div>

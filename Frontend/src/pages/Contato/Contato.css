@@ -1,0 +1,420 @@
+/* Estilos somente do conteúdo da página Contato.
+   Navbar, footer, cursor, fundo, tipografia e animações vêm de Home.css e Main.js. */
+
+.contato-main {
+    position: relative;
+    z-index: 1;
+}
+
+.contato-hero {
+    padding-top: 92px;
+    padding-bottom: 0;
+}
+
+.contato-hero h1 {
+    max-width: 840px;
+    font-size: clamp(38px, 4.45vw, 64px);
+    line-height: 1.12;
+}
+
+.contato-hero p {
+    max-width: 600px;
+    margin: 24px auto 0;
+}
+
+.contato-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.62fr) minmax(300px, 1fr);
+    align-items: stretch;
+    gap: 20px;
+    padding-top: 68px;
+    padding-bottom: 42px;
+}
+
+.contato-form-panel {
+    padding: 35px;
+    border: 1px solid rgba(255, 255, 255, .095);
+    border-radius: 26px;
+    background: linear-gradient(154deg, rgba(26, 22, 40, .94), rgba(11, 9, 19, .96));
+    min-width: 0;
+}
+
+.contato-form-panel form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+}
+
+.contato-fields-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    width: 100%;
+}
+
+.contato-field {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    min-width: 0;
+    width: 100%;
+}
+
+.contato-field>span,
+.contato-assuntos legend {
+    color: rgba(217, 214, 231, .78);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: .22em;
+}
+
+.contato-field input,
+.contato-field textarea {
+    width: 100%;
+    min-width: 0;
+    border: 1px solid rgba(255, 255, 255, .09);
+    background: rgba(255, 255, 255, .045);
+    color: #fff;
+    font: 400 13px/1.6 "Sora", system-ui, sans-serif;
+    outline: none;
+    border-radius: 15px;
+    padding: 17px 19px;
+    transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+.contato-field input {
+    height: 55px;
+}
+
+.contato-field textarea {
+    min-height: 162px;
+    resize: vertical;
+}
+
+.contato-field input::placeholder,
+.contato-field textarea::placeholder {
+    color: rgba(202, 198, 215, .49);
+}
+
+.contato-field input:focus,
+.contato-field textarea:focus {
+    border-color: rgba(123, 77, 255, .68);
+    background: rgba(255, 255, 255, .055);
+    box-shadow: 0 0 0 3px rgba(123, 77, 255, .10);
+}
+
+.contato-assuntos {
+    border: 0;
+    padding: 0;
+    margin: 24px 0 24px;
+    min-width: 0;
+    width: 100%;
+}
+
+.contato-assuntos legend {
+    margin-bottom: 12px;
+}
+
+.contato-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.contato-chip {
+    border: 1px solid rgba(255, 255, 255, .10);
+    background: rgba(255, 255, 255, .045);
+    padding: 10px 18px;
+    border-radius: 999px;
+    color: rgba(245, 241, 255, .86);
+    font: 400 12px "Sora", system-ui, sans-serif;
+    transition: background .2s, border-color .2s, transform .2s;
+}
+
+.contato-chip:hover {
+    border-color: rgba(255, 255, 255, .28);
+    transform: translateY(-1px);
+}
+
+.contato-chip.is-active {
+    border-color: rgba(255, 255, 255, .14);
+    background: linear-gradient(90deg, rgba(123, 77, 255, 0.78), rgba(205, 94, 150, 0.72));
+    box-shadow: inset 0 1px rgba(255, 255, 255, .12);
+    color: #fff;
+    font-weight: 600;
+}
+
+.contato-message-field {
+    margin-bottom: 24px;
+}
+
+.contato-submit {
+    min-height: 52px;
+    padding: 14px 28px;
+}
+
+.contato-submit span {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.contato-legal {
+    margin: 17px 0 0;
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(229, 224, 240, .65);
+}
+
+.contato-legal a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.contato-feedback {
+    margin: 14px 0 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #d9c7ff;
+}
+
+.contato-side {
+    display: grid;
+    grid-template-rows: repeat(3, auto) minmax(0, 1fr);
+    align-content: start;
+    gap: 16px;
+    min-width: 0;
+}
+
+.contato-channel {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 23px 24px;
+    min-width: 0;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 22px;
+    background: linear-gradient(140deg, rgba(22, 19, 35, .89), rgba(12, 10, 19, .9));
+    text-decoration: none;
+    transition: border-color .25s, transform .25s, background .25s;
+}
+
+.contato-channel:hover {
+    transform: translateY(-2px);
+    border-color: rgba(123, 77, 255, .38);
+}
+
+.contato-channel-icon {
+    display: grid;
+    flex: 0 0 45px;
+    width: 45px;
+    height: 45px;
+    place-items: center;
+    border-radius: 13px;
+    background: linear-gradient(135deg, #7B4DFF, #C73A68);
+}
+
+.contato-channel-icon.orange {
+    background: linear-gradient(135deg, #C73A68, #FF8A4C);
+}
+
+.contato-channel-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.65;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.contato-channel strong {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.contato-channel small {
+    display: block;
+    color: var(--mut);
+    font-size: 12px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.contato-brand-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    align-items: end;
+    min-height: 220px;
+    padding: 30px;
+    border-radius: 22px;
+    background: linear-gradient(130deg, #6336F5 0%, #A535A9 43%, #D74570 70%, #FF8A4C 100%);
+}
+
+.contato-brand-copy {
+    position: relative;
+    z-index: 2;
+}
+
+.contato-brand-copy>span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 10px;
+    letter-spacing: .25em;
+    color: rgba(255, 255, 255, .86);
+}
+
+.contato-brand-copy strong {
+    font-size: clamp(24px, 2.45vw, 35px);
+    font-weight: 600;
+    letter-spacing: -.03em;
+    line-height: 1.1;
+}
+
+/* Arte "Uma ideia. Mil formas." (IdeaArt.jsx) */
+.contato-brand-card .idea-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.contato-brand-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(200deg, transparent 45%, rgba(40, 10, 40, .35) 100%);
+}
+
+.idea-orbit {
+    transform-box: view-box;
+    animation: ideaSpin 40s linear infinite;
+}
+
+.idea-core {
+    transform-box: view-box;
+    transition: transform .6s cubic-bezier(.2, .7, .2, 1);
+}
+
+.contato-brand-card:hover .idea-core {
+    transform: scale(1.08) rotate(-8deg);
+}
+
+.contato-brand-card:hover .idea-orbit {
+    animation-duration: 14s;
+}
+
+.idea-twinkle {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: ideaTwinkle 3.2s ease-in-out infinite;
+}
+
+.idea-twinkle--late {
+    animation-delay: 1.6s;
+}
+
+@keyframes ideaSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ideaTwinkle {
+    0%, 100% {
+        opacity: .25;
+        transform: scale(.6);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
+
+.calm .idea-orbit,
+.calm .idea-twinkle {
+    animation: none;
+}
+
+@media (max-width: 900px) {
+    .contato-grid {
+        grid-template-columns: 1fr;
+        max-width: 760px;
+    }
+
+    .contato-side {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: none;
+    }
+
+    .contato-brand-card {
+        min-height: 180px;
+    }
+}
+
+@media (max-width: 600px) {
+    .contato-hero {
+        padding-top: 80px;
+    }
+
+    .contato-hero h1 {
+        font-size: clamp(34px, 8.2vw, 46px);
+    }
+
+    .contato-grid {
+        padding-top: 42px;
+    }
+
+    .contato-form-panel {
+        padding: 24px 19px;
+        border-radius: 22px;
+    }
+
+    .contato-fields-row,
+    .contato-side {
+        grid-template-columns: 1fr;
+    }
+
+    .contato-fields-row {
+        gap: 20px;
+    }
+
+    .contato-channel {
+        padding: 18px;
+    }
+
+    .contato-brand-card {
+        min-height: 194px;
+    }
+
+    .contato-chip {
+        padding: 10px 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .contato-chip,
+    .contato-channel {
+        transition: none;
+    }
+
+    .idea-orbit,
+    .idea-twinkle {
+        animation: none;
+    }
+
+    .idea-core {
+        transition: none;
+    }
+}

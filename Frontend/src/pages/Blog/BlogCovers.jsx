@@ -87,7 +87,7 @@ function Reasoning({ uid, shift }) {
     );
 }
 
-/* 02 · Briefing — conversa que vira marca */
+/* 02 · Briefing — conversa que vira campanha */
 function Briefing({ uid, shift }) {
     return (
         <Frame uid={uid} shift={shift} from="#170d2b" via="#5b2a86" to="#c73a68" glow="#ff8a4c" gx={250} gy={140}>
