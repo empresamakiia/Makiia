@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { LegalFooter, LegalHeader, LegalToc } from "../../components/Legal/Legal";
+import { LegalToc } from "../../components/Legal/Legal";
+import LegalFrame from "../../components/Legal/LegalFrame";
 import { useCookieConsent } from "../../consent/context";
 import {
   CATEGORIES,
@@ -120,13 +121,12 @@ export default function Cookies() {
       : COOKIE_LIST.filter((cookie) => cookie.category === filter);
 
   return (
+    <LegalFrame active="/cookies">
     <div className="lg-page">
       <div className="lg-glow lg-glow--top" aria-hidden="true"></div>
       <div className="lg-glow lg-glow--bottom" aria-hidden="true"></div>
 
       <div className="lg-container">
-        <LegalHeader current="/cookies" />
-
         {/* ===== Destaque ===== */}
         <section className="lg-hero">
           <div className="lg-hero__text">
@@ -302,8 +302,7 @@ export default function Cookies() {
           </main>
         </div>
       </div>
-
-      <LegalFooter current="/cookies" />
     </div>
+    </LegalFrame>
   );
 }
