@@ -8,6 +8,7 @@ from app.routers import usuarios
 from app.routers import projetos
 from app.routers.brand_kits import router as brand_kits_router
 from app.routers.conversas import router as conversas_router
+from app.routers.auth_google import router as auth_google_router
 
 # Metadados das tags: organizam os grupos de endpoints na documentação
 tags_metadata = [
@@ -66,3 +67,4 @@ app.include_router(auth.router)
 app.include_router(projetos.router)
 app.include_router(brand_kits_router)
 app.include_router(conversas_router)
+app.include_router(auth_google_router)
