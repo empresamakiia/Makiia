@@ -1,0 +1,99 @@
+/*
+ * Moldura das páginas legais (LegalFrame.jsx): Privacidade, Termos e Cookies.
+ * O fundo animado da landing (#bg / .grid-bg) substitui o fundo e os brilhos próprios
+ * dos documentos, e a tipografia/largura seguem o padrão do restante do site.
+ */
+.legal-frame {
+  position: relative;
+  z-index: 1;
+}
+
+/* fundo transparente para mostrar o fundo animado; fonte padrão do site */
+.legal-frame .lg-page {
+  min-height: 0;
+  background: transparent;
+  font-family: "Sora", system-ui, sans-serif;
+}
+
+.legal-frame .lg-page button,
+.legal-frame .lg-page input {
+  font-family: inherit;
+}
+
+/* brilhos próprios dos documentos dão lugar ao fundo padrão do site */
+.legal-frame .lg-glow {
+  display: none;
+}
+
+/* mesma largura da navbar: o conteúdo vai de uma borda à outra dela */
+.legal-frame .lg-container {
+  width: min(100% - 48px, 1112px);
+  padding-top: 0;
+}
+
+/* espaço entre a navbar e o primeiro conteúdo (o destaque tinha 56px próprios,
+   pensados para o cabeçalho antigo das páginas) */
+.legal-frame .lg-hero {
+  align-items: start;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+/* selo: o rótulo colorido nunca quebra; o texto ao lado pode ir para 2 linhas */
+.legal-frame .lg-badge {
+  max-width: 100%;
+  line-height: 1.35;
+}
+
+.legal-frame .lg-badge > span {
+  flex: none;
+  white-space: nowrap;
+}
+
+/* título principal no tamanho dos destaques das demais páginas (até 56px) */
+.legal-frame .lg-hero h1 {
+  font-size: clamp(2.2rem, 4.6vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+/* o menu lateral "Nesta página" fica abaixo da navbar fixa */
+.legal-frame .lg-toc {
+  top: 6.5rem;
+}
+
+@media (max-width: 980px) {
+  .legal-frame .lg-hero {
+    padding-top: 2rem;
+    padding-bottom: 2.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .legal-frame .lg-container {
+    width: calc(100% - 32px);
+  }
+
+  .legal-frame .lg-hero {
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+  }
+
+  /* com o texto do selo em 2 linhas, cantos menos arredondados ficam melhor */
+  .legal-frame .lg-badge {
+    border-radius: 1.1rem;
+  }
+}
+
+/* impressão: só o documento */
+@media print {
+  #bg,
+  .grid-bg,
+  #cursor,
+  .progress,
+  #nav,
+  footer {
+    display: none !important;
+  }
+}
