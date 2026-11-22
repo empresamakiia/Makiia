@@ -1225,3 +1225,219 @@
     animation: none;
   }
 }
+
+/* =====================================================================
+   Padrão visual do site (Login e Cadastro)
+   ===================================================================== */
+
+/* fonte do site */
+.login-page {
+  font-family: "Sora", system-ui, sans-serif;
+}
+
+/* logo da MAKIIA (mesmo componente da navbar do site) */
+.login-logo {
+  display: inline-flex;
+  align-items: center;
+  letter-spacing: normal;
+}
+
+.login-logo .brand-logo {
+  gap: 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+}
+
+/* aba selecionada com o mesmo degradê suave dos selos e filtros do site */
+.login-page .tab-pill {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(90deg, rgba(123, 77, 255, 0.78), rgba(205, 94, 150, 0.72));
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.12);
+}
+
+/* O Home.css (carregado no site todo) tem regras globais para <footer> e <nav>
+   (margens, espaçamento, borda e "sticky"). Elas inflavam o rodapé desta tela
+   e faziam a página passar da altura da janela. */
+.login-page .login-footer {
+  margin: 0;
+  padding: 0.5rem 0 0;
+  border: 0;
+}
+
+.login-page .login-footer nav {
+  position: static;
+  top: auto;
+  z-index: auto;
+  margin: 0;
+}
+
+/* conteúdo centralizado verticalmente, sem margens fixas que forcem rolagem */
+.login-page .login-content {
+  margin: auto;
+  padding: 1.5rem 0;
+}
+
+/* telas baixas (notebooks 1366×768, 1280×720): compacta o painel criativo */
+@media (min-width: 761px) and (max-height: 820px) {
+  .login-section {
+    padding-top: 1.2rem;
+    padding-bottom: 0.8rem;
+  }
+
+  .login-page .login-content {
+    padding: 0.8rem 0;
+  }
+
+  .login-heading {
+    margin-bottom: 0.9rem;
+  }
+
+  .login-divider {
+    margin: 0.9rem 0;
+  }
+
+  .login-form {
+    gap: 0.8rem;
+  }
+
+  .creative-preview {
+    min-height: 0;
+  }
+
+  .chat-area {
+    min-height: 160px;
+  }
+}
+/* Desktop: a tela de login ocupa exatamente a altura da janela.
+   O painel criativo não cresce com a animação do chat (as mensagens mais
+   novas ficam visíveis e as antigas saem pelo topo, como num chat real). */
+@media (min-width: 761px) {
+  .login-page {
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+  }
+
+  .login-section {
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .creative-panel {
+    min-height: 0;
+  }
+
+  .creative-preview {
+    flex: 0 1 auto;
+    min-height: 0;
+    max-height: min(32rem, 100%);
+  }
+
+  .chat-area {
+    min-height: 0;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+}
+/* Coluna do formulário: se ainda faltar espaço em telas muito baixas,
+   a barra de rolagem fina fica visível (em vez de esconder o conteúdo). */
+@media (min-width: 761px) {
+  .login-section {
+    scrollbar-width: thin;
+    scrollbar-color: #3a3047 transparent;
+  }
+
+  .login-section::-webkit-scrollbar {
+    display: block;
+    width: 6px;
+  }
+
+  .login-section::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: #3a3047;
+  }
+}
+
+/* Telas de notebook (até 820px de altura): formulário mais compacto,
+   para Login e Cadastro caberem inteiros sem rolagem. */
+@media (min-width: 761px) and (max-height: 820px) {
+  .login-section {
+    padding-top: 1rem;
+    padding-bottom: 0.7rem;
+  }
+
+  .login-page .login-content {
+    padding: 0.3rem 0;
+  }
+
+  .auth-tabs {
+    min-height: 2.25rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .auth-tab {
+    min-height: 1.8rem;
+    padding: 0.4rem 0.7rem;
+  }
+
+  .login-heading {
+    margin-bottom: 0.8rem;
+  }
+
+  .login-heading h1 {
+    font-size: 1.4rem;
+  }
+
+  .social-button {
+    min-height: 2.3rem;
+  }
+
+  .login-divider {
+    margin: 0.7rem 0;
+  }
+
+  .login-form {
+    gap: 0.6rem;
+  }
+
+  .form-field {
+    gap: 0.35rem;
+  }
+
+  .input-wrapper {
+    min-height: 2.45rem;
+  }
+
+  .submit-button {
+    min-height: 2.6rem;
+  }
+
+  .switch-mode {
+    margin-top: 0.75rem;
+  }
+}
+
+/* Telas ainda mais baixas (até 740px): o subtítulo do cabeçalho sai */
+@media (min-width: 761px) and (max-height: 740px) {
+  .login-heading p {
+    display: none;
+  }
+
+  .login-heading h1 {
+    margin-bottom: 0;
+  }
+
+  .auth-tabs {
+    margin-bottom: 0.85rem;
+  }
+
+  .login-form {
+    gap: 0.5rem;
+  }
+
+  .login-section {
+    padding-top: 0.8rem;
+    padding-bottom: 0.45rem;
+  }
+}
