@@ -14,6 +14,8 @@ from app.models.solicitacoes_ia import SolicitacaoIA
 from app.models.execucoes_ia import ExecucaoIA
 from app.models.arquivos import Arquivo
 from app.models.brand_kits import BrandKit
+from app.models.conversas import Conversa
+from app.models.mensagens import Mensagem
 
 def criar_tabelas():
     Base.metadata.create_all(bind=engine)
