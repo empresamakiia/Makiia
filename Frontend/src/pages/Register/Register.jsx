@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AuthPanel from "../../components/AuthPanel/AuthPanel";
+import Logo from "../../components/Logo/Logo.jsx";
 import { fetchCurrentUser, register } from "../../services/auth";
 import "./Register.css";
 
@@ -131,8 +132,8 @@ function Register() {
     >
       <section className="login-section">
         <header className="login-header">
-          <a className="login-logo" href="/" aria-label="Makiia início">
-            MAKIIA
+          <a className="login-logo" href="/" aria-label="MAKIIA, página inicial">
+            <Logo size={26} />
           </a>
 
           <a className="back-to-site" href="/">
@@ -334,8 +335,8 @@ function Register() {
                   onChange={updateField(setAcceptTerms)}
                 />
                 <span>
-                  Li e aceito os <a href="#termos">Termos</a> e a{" "}
-                  <a href="#privacidade">Política de Privacidade</a>
+                  Li e aceito os <a href="/termos" target="_blank" rel="noopener noreferrer">Termos</a> e a{" "}
+                  <a href="/privacidade" target="_blank" rel="noopener noreferrer">Política de Privacidade</a>
                 </span>
               </label>
 
@@ -368,11 +369,11 @@ function Register() {
         <footer className="login-footer">
           <span>© 2026 MAKIIA</span>
           <nav aria-label="Links institucionais">
-            <a href="#termos">Termos</a>
+            <a href="/termos">Termos</a>
             <span>·</span>
-            <a href="#privacidade">Privacidade</a>
+            <a href="/privacidade">Privacidade</a>
             <span>·</span>
-            <a href="#ajuda">Ajuda</a>
+            <a href="/ajuda">Ajuda</a>
           </nav>
         </footer>
       </section>

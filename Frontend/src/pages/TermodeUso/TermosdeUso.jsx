@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
-import {
-  LegalFooter,
-  LegalHeader,
-  LegalToc,
-} from "../../components/Legal/Legal";
+import { LegalToc } from "../../components/Legal/Legal";
+import LegalFrame from "../../components/Legal/LegalFrame";
 import "./TermosdeUso.css";
 
 /* ATENÇÃO: texto-base. Precisa de revisão jurídica antes de ir ao ar
@@ -90,13 +87,12 @@ function Section({ id, number, title, children }) {
 
 export default function TermosDeUso() {
   return (
+    <LegalFrame active="/termos">
     <div className="lg-page tu-page">
       <div className="lg-glow lg-glow--top" aria-hidden="true"></div>
       <div className="lg-glow lg-glow--bottom" aria-hidden="true"></div>
 
       <div className="lg-container">
-        <LegalHeader current="/termos" />
-
         {/* ===== Destaque ===== */}
         <section className="lg-hero">
           <div className="lg-hero__text">
@@ -436,8 +432,7 @@ export default function TermosDeUso() {
           </main>
         </div>
       </div>
-
-      <LegalFooter current="/termos" />
     </div>
+    </LegalFrame>
   );
 }

@@ -9,7 +9,11 @@ const SITE_LINKS = [
     ["/ajuda", "Ajuda"],
 ];
 
-export default function SiteNav({ active = "/" }) {
+/**
+ * @param {string} active  rota atual (destaca o link correspondente)
+ * @param {Array<[string, string]>} links  [href, rótulo]; padrão: páginas do site
+ */
+export default function SiteNav({ active = "/", links = SITE_LINKS }) {
     return (
         <nav id="nav" aria-label="Navegação principal">
             <div className="w">
@@ -18,7 +22,7 @@ export default function SiteNav({ active = "/" }) {
                         <Logo size={28} />
                     </a>
                     <div className="lk" id="lk">
-                        {SITE_LINKS.map(([href, label]) => (
+                        {links.map(([href, label]) => (
                             <a
                                 key={href}
                                 href={href}
