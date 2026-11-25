@@ -5,7 +5,9 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.database.session import get_db  # ajuste se o nome for outro
+from app.models.perfis import Perfil
 from app.models.usuarios import Usuario
+from app.routers.auth import PERFIL_PADRAO_CADASTRO
 from app.schemas.auth_google import GoogleCallbackRequest, GoogleTokenResponse
 from app.services.token import criar_token_acesso
 from app.services.google_auth import montar_url_autorizacao, trocar_code_por_usuario
@@ -44,11 +46,18 @@ def callback_google(payload: GoogleCallbackRequest, db: Session = Depends(get_db
     usuario = db.query(Usuario).filter(Usuario.email == email).first()
 
     if usuario is None:
+        # Mesmo perfil padrão do cadastro por e-mail; cria se ainda não existir
+        perfil = db.query(Perfil).filter(Perfil.nome == PERFIL_PADRAO_CADASTRO).first()
+        if not perfil:
+            perfil = Perfil(nome=PERFIL_PADRAO_CADASTRO, descricao="Perfil padrão de quem cria a conta pelo site")
+            db.add(perfil)
+            db.flush()
+
         usuario = Usuario(
             nome=dados.get("name") or email.split("@")[0],
             email=email,
             senha_hash=secrets.token_hex(32),
-            id_perfil=1,
+            id_perfil=perfil.id_perfil,
             ativo=True,
         )
         db.add(usuario)
