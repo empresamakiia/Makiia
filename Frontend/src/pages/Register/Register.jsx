@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AuthPanel from "../../components/AuthPanel/AuthPanel";
 import Logo from "../../components/Logo/Logo.jsx";
-import { fetchCurrentUser, register } from "../../services/auth";
+import { fetchCurrentUser, register, startGoogleLogin } from "../../services/auth";
 import "./Register.css";
 
 const STRENGTH_LABELS = ["Muito fraca", "Fraca", "Média", "Boa", "Forte"];
@@ -34,6 +34,7 @@ function Register() {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
   const strength = getStrength(password);
 
@@ -120,10 +121,23 @@ function Register() {
     }
   }
 
-  function handleSocialSignup(provider) {
-    window.alert(
-      `O cadastro com ${provider} precisa ser integrado à autenticação do projeto.`,
-    );
+  // O fluxo do Google é o mesmo do login: o backend cria a conta se ela não existir.
+  async function handleSocialSignup(provider) {
+    if (provider !== "Google") {
+      window.alert(`O cadastro com ${provider} ainda não está disponível.`);
+      return;
+    }
+
+    if (googleLoading) return;
+
+    setGoogleLoading(true);
+    setError("");
+    try {
+      await startGoogleLogin();
+    } catch (apiError) {
+      setError(apiError.message || "Não foi possível conectar ao Google.");
+      setGoogleLoading(false);
+    }
   }
 
   return (
@@ -181,6 +195,8 @@ function Register() {
                 className="social-button"
                 type="button"
                 onClick={() => handleSocialSignup("Google")}
+                disabled={googleLoading}
+                aria-busy={googleLoading}
               >
                 <svg
                   className="social-icon google-icon"
@@ -204,7 +220,7 @@ function Register() {
                     d="M24 10.6c3.2 0 6 1.1 8.2 3.2l6.2-6.2C34.7 4.1 29.9 2 24 2 15.5 2 8.2 6.9 4.6 14l7.2 5.5c1.7-5.1 6.5-8.9 12.2-8.9z"
                   />
                 </svg>
-                Google
+                {googleLoading ? "Conectando…" : "Google"}
               </button>
 
               <button
