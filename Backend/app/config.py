@@ -20,6 +20,10 @@ class Settings(BaseSettings):
     GOOGLE_CLIENT_SECRET: str = ""
     GOOGLE_REDIRECT_URI: str = "http://localhost:5173/auth/google/callback"
 
+    # Origens extras liberadas no CORS (ex.: URL do front na Vercel).
+    # Separe várias por vírgula: "https://app.vercel.app,https://makiia.com.br"
+    CORS_ORIGINS: str = ""
+
     model_config = SettingsConfigDict(env_file=".env")
 
 
