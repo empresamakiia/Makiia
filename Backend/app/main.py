@@ -52,6 +52,13 @@ origens_permitidas = [
     "http://localhost:5174",   # Vite (porta alternativa, quando a 5173 já está em uso)
 ]
 
+# Origens de produção vêm da variável de ambiente CORS_ORIGINS (separadas por vírgula)
+origens_permitidas += [
+    origem.strip().rstrip("/")
+    for origem in settings.CORS_ORIGINS.split(",")
+    if origem.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origens_permitidas,   # quem pode chamar

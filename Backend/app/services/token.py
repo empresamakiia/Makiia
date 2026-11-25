@@ -4,11 +4,13 @@ from datetime import datetime, timedelta, timezone
 
 from jose import jwt, JWTError
 
+from app.config import settings
+
 # Chave que ASSINA os tokens — quem tiver ela pode forjar tokens válidos.
-# EM PRODUÇÃO: deve vir de variável de ambiente, NUNCA ficar no código.
+# Vem da variável de ambiente SECRET_KEY (nunca fica no código).
 # Para gerar uma de verdade: python -c "import secrets; print(secrets.token_hex(32))"
-SECRET_KEY = "makiia-dev-secret-troque-em-producao-9f3c7a1b"
-ALGORITMO = "HS256"
+SECRET_KEY = settings.SECRET_KEY
+ALGORITMO = settings.ALGORITHM
 EXPIRA_MINUTOS = 60 * 8  # token válido por 8 horas (uma jornada de trabalho)
 TEMPO_EXPIRACAO_RECUPERACAO_MINUTOS = 30  # validade do token de recuperação
 
